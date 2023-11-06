@@ -1,8 +1,5 @@
 import { Navigate } from "react-router-dom";
-
-type useAuthProps = {
-  children: React.Component;
-};
+import { useAuthProps } from "../types/types";
 
 const useAuth = ({ children }: useAuthProps) => {
   return (props: useAuthProps) => {
