@@ -4,8 +4,8 @@ import { RootState } from "../state/store";
 import { checkIsMobile } from "../state/displaySlice";
 
 const useCheckMobile = () => {
-  const dispatch = useDispatch();
   const isMobile = useSelector((state: RootState) => state.display.isMobile);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleResize = () => {

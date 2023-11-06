@@ -1,24 +1,35 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload yes and no.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SignUp />
+      {/* <Switch>
+        <Route exact path="/">
+          <SignUp />
+        </Route>
+        <Route path="/signin">
+          <SignIn />
+        </Route>
+        <Route path="/home">
+          <Home />
+        </Route>
+        <Route path="/me">
+          <Me />
+        </Route>
+        <Route path="/additem">
+          <AddItem />
+        </Route>
+        <Route path="/mycollection">
+          <MyCollection />
+        </Route>
+        <Route path="/itemdetails/:id">
+          <ItemDetails /> //add a WithAuth/UseAuth HOC
+        </Route>
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch> */}
     </div>
   );
 }
