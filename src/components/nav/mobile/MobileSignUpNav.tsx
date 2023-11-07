@@ -34,7 +34,7 @@ const MobileSignUpNav = () => {
           isDropDownActive ? "drop-down-active" : ""
         }`}
       >
-        <Link to={"#sign-up"}>Sign up</Link>
+        <a href="#sign-up">Sign up</a>
         <Link to={"/signin"}>Log in</Link>
       </div>
     </>
