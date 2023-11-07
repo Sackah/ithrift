@@ -1,15 +1,37 @@
 import "./styles/SignIn.css";
 import logo from "../assets/20231105_165612.png";
 import { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const SignInPage = () => {
   const [credentials, setCredentials] = useState({
     number: "",
     password: "",
   });
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [error, setError] = useState<null | string>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoggingIn(true);
+
+    const formData = new FormData();
+    formData.append("phone-number", credentials.number);
+    formData.append("password", credentials.password);
+
+    axios
+      .post("https://jsonplaceholder.typicode.com/todos/1", formData)
+      .then((response) => {
+        console.log(response.data);
+        setIsLoggingIn(false);
+        setError(null);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoggingIn(false);
+        setError("Credentials may be incorrect!");
+      });
 
     console.log("Submit!");
   };
@@ -61,9 +83,14 @@ const SignInPage = () => {
             onChange={handlePasswordChange}
             required
           />
-          <button>Log in</button>
+          {!isLoggingIn && <button>Log in</button>}
+          {isLoggingIn && <button>Loging in...</button>}
         </form>
+        <p>
+          New User? <Link to={"/"}>Sign Up</Link>
+        </p>
       </div>
+      {error && <p className="error">{error}</p>}
     </div>
   );
 };

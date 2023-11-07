@@ -94,6 +94,29 @@ input[type="number"]::-webkit-outer-spin-button {
     transition: background-color 0.5s ease;
 }
 
+.sign-in form{
+    position: relative;
+}
+
+.sign-in .error{
+    color: red;
+    position: absolute;
+    top: 0;
+}
+
+.sign-in p{
+    margin-top: 32px;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+    text-align: right;
+    font-weight: 700;
+}
+
+.sign-in a {
+    text-decoration: underline;
+    color: blueviolet;
+}
+
 
 /* TABLET DISPLAY */
 @media only screen and (max-width: 1000px){
@@ -135,6 +158,6 @@ input[type="number"]::-webkit-outer-spin-button {
     .sign-in-box{
         margin-top: -40%;
         width: 80%;
-        height: 85vw;
+        min-height: 85vw;
     }
 }
