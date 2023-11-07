@@ -44,7 +44,7 @@
     outline: none;
 }
 
-.number-wrapper{
+.sign-in .number-wrapper{
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -54,7 +54,7 @@
     width: 74%;
 }
 
-.country-code{
+.sign-in .country-code{
     width: 24%;
     height: 35px;
     background: var(--grey-1);
@@ -102,6 +102,7 @@ input[type="number"]::-webkit-outer-spin-button {
     color: red;
     position: absolute;
     top: 0;
+    font-size: 1rem;
 }
 
 .sign-in p{
@@ -147,7 +148,7 @@ input[type="number"]::-webkit-outer-spin-button {
         height: 30px;
     }
 
-    .country-code{
+    .sign-in .country-code{
         height: 30px;
     }
 }

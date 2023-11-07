@@ -1,15 +1,18 @@
 import logo from "../../../assets/20231105_165612.png";
 import NavButtons from "./NavButtons";
+import { Link } from "react-router-dom";
 
 const DesktopSignUpNav = () => {
   return (
     <nav className="desktop-nav-primary">
       <div>
         <div className="logo-wrapper">
-          <div className="nav-logo">
-            <img src={logo} alt="iThrift-logo" />
-            <p>iThrift</p>
-          </div>
+          <Link to={"/"}>
+            <div className="nav-logo">
+              <img src={logo} alt="iThrift-logo" />
+              <p>iThrift</p>
+            </div>
+          </Link>
         </div>
         <NavButtons />
       </div>

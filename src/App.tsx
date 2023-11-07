@@ -10,12 +10,9 @@ function App() {
 
       {/* <Switch>
         
-        <Route path="/signin">
-          <SignIn />
+        <Route>
+          <ProtectedRoute path="/" element={<Secret />} />
         </Route>
-        <Routes>
-          <ProtectedRoute path="/" element={<SignUp />} />
-        </Routes>
         <Route path="/me">
           <Me />
         </Route>

@@ -16,10 +16,12 @@ const MobileSignUpNav = () => {
       <nav className="mobile-nav-primary">
         <div>
           <div className="logo-wrapper">
-            <div className="nav-logo">
-              <img src={logo} alt="iThrift-logo" />
-              <p>iThrift</p>
-            </div>
+            <Link to={"/"}>
+              <div className="nav-logo">
+                <img src={logo} alt="iThrift-logo" />
+                <p>iThrift</p>
+              </div>
+            </Link>
           </div>
           <HamburgerMenu
             isDropDownActive={isDropDownActive}
