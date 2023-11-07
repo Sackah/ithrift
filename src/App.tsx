@@ -1,21 +1,22 @@
 import { Routes, Route } from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
 import SignInPage from "./pages/SignInPage";
+import PersonalPage from "./pages/PersonalPage";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<SignUpPage />} />
       <Route path="/signin" element={<SignInPage />} />
+      <Route path="/personal" element={<PersonalPage />} />
 
       {/* <Switch>
         
-        <Route>
-          <ProtectedRoute path="/" element={<Secret />} />
-        </Route>
-        <Route path="/me">
-          <Me />
-        </Route>
+        <Route path="/personal" element={
+          <UseAuth>
+            <PersonalPage />
+          </UseAuth>
+        }/>
         <Route path="/additem">
           <AddItem />
         </Route>

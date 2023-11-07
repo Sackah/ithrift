@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SignUpFormProps } from "../../types/types";
 import axios from "axios";
+import { Navigate } from "react-router";
 
 const OTPForm = (props: SignUpFormProps) => {
   const [otp, setOtp] = useState("");
@@ -21,6 +22,7 @@ const OTPForm = (props: SignUpFormProps) => {
         setIsPending(false);
         setError(null);
         changeForm();
+        <Navigate to={"/home"} />;
       })
       .catch((error) => {
         console.log(error);

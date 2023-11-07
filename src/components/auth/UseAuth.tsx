@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
-import { useAuthProps } from "../../../types/types";
+import { useAuthProps } from "../../types/types";
 
-const useAuth = ({ children }: useAuthProps) => {
+const UseAuth = ({ children }: useAuthProps) => {
   return (props: useAuthProps) => {
     const token = localStorage.getItem("token");
 
@@ -13,4 +13,4 @@ const useAuth = ({ children }: useAuthProps) => {
   return children;
 };
 
-export default useAuth;
+export default UseAuth;

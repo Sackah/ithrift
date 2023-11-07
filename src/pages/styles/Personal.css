@@ -1,0 +1,145 @@
+:root{
+    --fontFamily-base: "gordita","Helvetica Neue","Helvetica",sans-serif;
+    --fontFamily-print: "Georgia","Times New Roman","Times",serif;
+    --fontFamily-mono: "Consolas",monospace;
+    --header-background: #f7f6f2;
+}
+
+.personal-page{
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    overflow-y: hidden;
+}
+
+.personal-page h3{
+    margin: auto;
+    text-align: center;
+    margin-top: 6%;
+    margin-bottom: 4%;
+    font-size: 2rem;
+    font-family: var(--fontFamily-mono);
+}
+
+.personal-page > div{
+    text-align: center;
+}
+
+.personal-page p{
+    /* text-align: left */
+    font-family: var(--fontFamily-base);
+    margin-bottom: 15px;
+}
+
+.personal-page button{
+    /* padding: 15px 112px; */
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 300px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    background-color: crimson;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4%;
+ 
+}
+
+.personal-page button:hover{
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
+    cursor: pointer;
+}
+
+.personal-page .fa-plus{
+    color: #fff;
+}
+
+.personal-page button:hover > .fa-plus{
+    animation: rotate 0.5s linear;
+}
+
+.mobile-home-page-nav{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+}
+
+.personal-wrapper, .home-wrapper{
+    border-top: 1px solid #68737d;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.personal-wrapper a, .home-wrapper a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-home-page-nav .active, .desktop-homepage-nav .active{
+    color: crimson;
+}
+
+.mobile-home-page-nav .fa-solid{
+    font-size: 1.7rem;
+}
+
+.desktop-homepage-nav{
+    padding: 0 10% 0 10%;
+    height: 90px;
+    border-bottom: 1px solid #68737d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    font-weight: 700;
+}
+
+.desktop-homepage-nav img{
+    width: 44px;
+    height: 40px;
+}
+
+.desktop-homepage-nav a{
+    margin-left: 80px;
+    font-family: var(--fontFamily-base);
+    font-size: 1.2rem;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+
+/* TABLET DISPLAY */
+@media only screen and (max-width: 1000px){
+    .personal-page h3{
+        margin-top: 20%;
+        margin-bottom: 20%;
+    }
+
+    .personal-page button{
+        margin-bottom: 10%;
+    }
+}
+
+
+/* MOBILE DISPLAY */
+@media only screen and (max-width: 600px){
+
+}

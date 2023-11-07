@@ -2,7 +2,7 @@ import "./styles/SignIn.css";
 import logo from "../assets/20231105_165612.png";
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const SignInPage = () => {
   const [credentials, setCredentials] = useState({
@@ -26,6 +26,7 @@ const SignInPage = () => {
         console.log(response.data);
         setIsLoggingIn(false);
         setError(null);
+        <Navigate to={"/personal"} />;
       })
       .catch((error) => {
         console.log(error);
