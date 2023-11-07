@@ -80,11 +80,6 @@
     color: #87929d;
 }
 
-/* .hamburger-menu{
-    display: flex;
-    align-items: center;
-} */
-
 .menu-icon {
     width: 1.5rem;
     height: 1.5rem;
@@ -93,8 +88,6 @@
     flex-direction: column;
     justify-content: space-around;
     cursor: pointer;
-    /* margin-left: 15px; */
-    /* border: 2px solid red; */
 }
 
 .menu-icon span {

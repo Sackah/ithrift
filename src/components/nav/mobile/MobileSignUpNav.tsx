@@ -2,6 +2,7 @@ import "../Nav1.css";
 import logo from "../../../assets/20231105_165612.png";
 import HamburgerMenu from "./HamburgerMenu";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MobileSignUpNav = () => {
   const [isDropDownActive, setIsDropDownActive] = useState(false);
@@ -31,8 +32,8 @@ const MobileSignUpNav = () => {
           isDropDownActive ? "drop-down-active" : ""
         }`}
       >
-        <a href="#sign-up">Sign up</a>
-        <a href="/login">Log in</a>
+        <Link to={"#sign-up"}>Sign up</Link>
+        <Link to={"/signin"}>Log in</Link>
       </div>
     </>
   );

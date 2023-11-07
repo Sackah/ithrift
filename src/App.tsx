@@ -1,19 +1,21 @@
-import SignUp from "./pages/SignUp";
+import { Routes, Route } from "react-router-dom";
+import SignUpPage from "./pages/SignUpPage";
+import SignInPage from "./pages/SignInPage";
 
 function App() {
   return (
-    <div className="App">
-      <SignUp />
+    <Routes>
+      <Route path="/" element={<SignUpPage />} />
+      <Route path="/signin" element={<SignInPage />} />
+
       {/* <Switch>
-        <Route exact path="/">
-          <SignUp />
-        </Route>
+        
         <Route path="/signin">
           <SignIn />
         </Route>
-        <Route path="/home">
-          <Home />
-        </Route>
+        <Routes>
+          <ProtectedRoute path="/" element={<SignUp />} />
+        </Routes>
         <Route path="/me">
           <Me />
         </Route>
@@ -30,7 +32,7 @@ function App() {
           <NotFound />
         </Route>
       </Switch> */}
-    </div>
+    </Routes>
   );
 }
 

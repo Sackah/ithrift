@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
+
 const NavButtons = () => {
   return (
     <div className="nav-buttons">
-      <a href="#sign-up">
+      <Link to={"#sign-up"}>
         <button className="btn submit-btn">Sign up</button>
-      </a>
-      <button className="btn sign-in-btn">Sign in</button>
+      </Link>
+      <Link to={"/signin"}>
+        <button className="btn sign-in-btn">Sign in</button>
+      </Link>
     </div>
   );
 };
