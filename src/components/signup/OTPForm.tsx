@@ -28,7 +28,7 @@ const OTPForm = (props: SignUpFormProps) => {
         setError("Please try again");
       });
 
-    changeForm(); //Remove this
+    changeForm(); //REMOVE THIS
     console.log("rrr");
   };
 

@@ -4,6 +4,7 @@ import axios from "axios";
 
 const NumberForm = (props: SignUpFormProps) => {
   const [number, setNumber] = useState("");
+  const [username, setUserName] = useState("");
   const [error, setError] = useState<null | any>(null);
   const [isPending, setIsPending] = useState(false);
   const { changeForm } = props;
@@ -13,6 +14,7 @@ const NumberForm = (props: SignUpFormProps) => {
     setIsPending(true);
 
     const formData = new FormData();
+    formData.append("username", username);
     formData.append("phone-number", number);
 
     axios
@@ -29,7 +31,7 @@ const NumberForm = (props: SignUpFormProps) => {
         setError("Phone number not found");
       });
 
-    changeForm(); //Remove this
+    changeForm(); // REMOVE THIS
     console.log("nnn");
   };
 
@@ -41,10 +43,26 @@ const NumberForm = (props: SignUpFormProps) => {
     }
   };
 
+  const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setUserName(value);
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         {error && <p className="error">{error}</p>}
+        <label htmlFor="username" className="visibly-hidden">
+          Name
+        </label>
+        <input
+          type="text"
+          id="username"
+          placeholder="what would you like us to call you?"
+          value={username}
+          onChange={handleUserNameChange}
+          required
+        />
         <label htmlFor="signup-number" className="visibly-hidden">
           Telephone number
         </label>
