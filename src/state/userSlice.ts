@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-type items = {
-  id: number;
+export type items = {
+  id: string;
   itemName: string;
   image: string;
   price: string;
 };
 
-type UserState = {
+export type UserState = {
   id: number;
   username: string;
   items: items[];

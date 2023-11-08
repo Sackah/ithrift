@@ -17,7 +17,7 @@ const NumberForm = (props: SignUpFormProps) => {
     event.preventDefault();
     setIsPending(true);
 
-    if (credentials.passwordConfirm != credentials.password) {
+    if (credentials.passwordConfirm !== credentials.password) {
       setError("Passwords does not match!");
     } else {
       const formData = new FormData();

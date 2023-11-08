@@ -1,0 +1,59 @@
+.add-item{
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.add-item label{
+    text-align: left;
+    display: block;
+}
+
+.add-item h5{
+    font-size: 2rem;
+    color: #1b2e34;
+    margin-bottom: 30px;
+}
+
+.add-item input{
+    width: 100%;
+    padding: 12px 22px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    margin: 10px 0 30px 0;
+    display: block;
+}
+
+.add-item button{
+    background-color: #1b2e34;
+    color: #fff;
+    border: 0;
+    padding: 8px;
+    cursor: pointer;
+    width: 100%;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.add-item button:hover{
+    background-color: #fff;
+    color: #1b2e34;
+    transition: background-color 0.5s ease;
+}
+
+/* TABLET DISPLAY */
+@media only screen and (max-width: 1000px){
+    .add-item h5{
+        margin-top: 40%;
+    }
+}
+
+
+/* MOBILE DISPLAY */
+@media only screen and (max-width: 600px){
+    .add-item{
+        width: 85%;
+    }
+}
