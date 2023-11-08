@@ -12,7 +12,11 @@ type UserState = {
   items: items[];
 } | null;
 
-const initialState: UserState = null;
+const initialState: UserState = {
+  id: 0,
+  username: "",
+  items: [],
+};
 
 const userSlice = createSlice({
   name: "user",
@@ -22,7 +26,7 @@ const userSlice = createSlice({
       state = action.payload;
     },
     logout: (state) => {
-      state = null;
+      state = { id: 0, username: "", items: [] };
     },
   },
 });

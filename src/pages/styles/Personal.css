@@ -12,6 +12,22 @@
     overflow-y: hidden;
 }
 
+.personal-page .fa-right-from-bracket{
+    font-size: 2rem;
+    color: crimson;
+}
+
+.logout-wrapper{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 110px;
+    right: 20px;
+    cursor: pointer;
+}
+
 .personal-page h3{
     margin: auto;
     text-align: center;
@@ -136,6 +152,10 @@
 
     .personal-page button{
         margin-bottom: 10%;
+    }
+
+    .logout-wrapper{
+        top: 20px;
     }
 }
 

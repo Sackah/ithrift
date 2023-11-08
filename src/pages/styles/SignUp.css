@@ -12,7 +12,7 @@
 
 .sign-up-container{
     text-align: center;
-    height: 400px;
+    height: 500px;
 }
 
 .sign-up-container h2{
@@ -47,7 +47,7 @@
     border-radius: 6px 0 0 6px;
 }
 
-.sign-up-container input[type=text]{
+.sign-up-container input[type=text], .sign-up-container input[type=password]{
     padding: 12px 22px;
     width: 100%;
     border: 1px solid #000;
