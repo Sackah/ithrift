@@ -127,7 +127,4 @@ footer{
     .sign-up-container form{
         width: 85%;
     }
-    .sign-up-container input[type=text]{
-        font-size: 0.8rem;
-    }
 }

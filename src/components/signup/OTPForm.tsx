@@ -52,7 +52,7 @@ const OTPForm = (props: SignUpFormProps) => {
             value={otp}
             title="Please enter the one time pin"
             onChange={handleOtpChange}
-            placeholder="enter the one time pin sent to your phone"
+            placeholder="enter the otp sent to your phone"
             required
           />
         </div>
