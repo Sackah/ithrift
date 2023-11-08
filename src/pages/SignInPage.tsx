@@ -3,6 +3,8 @@ import logo from "../assets/20231105_165612.png";
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../state/userSlice";
 
 const SignInPage = () => {
   const [credentials, setCredentials] = useState({
@@ -12,6 +14,7 @@ const SignInPage = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [error, setError] = useState<null | string>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,6 +30,7 @@ const SignInPage = () => {
         console.log(response.data);
         setIsLoggingIn(false);
         setError(null);
+        dispatch(login(response.data.user));
         navigate("/personal");
       })
       .catch((error) => {

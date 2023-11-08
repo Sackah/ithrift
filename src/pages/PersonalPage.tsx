@@ -1,8 +1,12 @@
 import HomePageNav from "../components/nav/HomePageNav";
 import "./styles/Personal.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../state/store";
 
 const PersonalPage = () => {
+  const user = useSelector((state: RootState) => state);
+
   return (
     <div className="personal-page">
       <HomePageNav />

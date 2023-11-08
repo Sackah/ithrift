@@ -2,6 +2,8 @@ import { useState } from "react";
 import { SignUpFormProps } from "../../types/types";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { login } from "../../state/userSlice";
 
 const OTPForm = (props: SignUpFormProps) => {
   const [otp, setOtp] = useState("");
@@ -9,6 +11,7 @@ const OTPForm = (props: SignUpFormProps) => {
   const [isPending, setIsPending] = useState(false);
   const { changeForm } = props;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,6 +25,7 @@ const OTPForm = (props: SignUpFormProps) => {
         console.log(response.data);
         setIsPending(false);
         setError(null);
+        dispatch(login(response.data.user));
         changeForm();
         navigate("/home");
       })
