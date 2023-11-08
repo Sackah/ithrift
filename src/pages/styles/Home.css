@@ -1,0 +1,32 @@
+.all-items{
+    margin: 0 auto;
+    width: 85%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.all-items .image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.all-items img{
+    max-width: 100%;
+    height: auto;
+}
+
+@media only screen and (max-width: 1000px){
+    .all-items{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* MOBILE DISPLAY */
+@media only screen and (max-width: 600px){
+    .all-items{
+        grid-template-columns: 1fr;
+    }
+}

@@ -4,6 +4,7 @@ import SignInPage from "./pages/SignInPage";
 import PersonalPage from "./pages/PersonalPage";
 import MyCollection from "./pages/MyCollection";
 import AddItemPage from "./pages/AddItemPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/personal" element={<PersonalPage />} />
       <Route path="/mycollection" element={<MyCollection />} />
       <Route path="/additem" element={<AddItemPage />} />
+      <Route path="/home" element={<HomePage />} />
 
       {/* <Switch>
         

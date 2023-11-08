@@ -5,8 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
   width: 100%;
+}
+
+html{
+  scroll-behavior: smooth;
 }
 
 a{

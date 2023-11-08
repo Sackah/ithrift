@@ -10,6 +10,18 @@
     height: 80vh;
 }
 
+.sign-up-section1 h3{
+    font-family: var(--fontFamily-mono);
+    margin-left: 30px;
+    font-size: 5rem;
+}
+
+.sign-up-section1 p{
+    font-family: "Plus Jakarta Sans",sans-serif;
+    margin-left: 50px;
+    font-size: 1.2rem;
+}
+
 .sign-up-container{
     text-align: center;
     height: 500px;
@@ -126,5 +138,13 @@ footer{
     }
     .sign-up-container form{
         width: 85%;
+    }
+    .sign-up-section1 h3{
+        font-size: 4rem;
+    }
+    
+    .sign-up-section1 p{
+        margin-left: 30px;
+        font-size: 1.1rem;
     }
 }

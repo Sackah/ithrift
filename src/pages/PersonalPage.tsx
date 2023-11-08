@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../state/userSlice";
 
 const PersonalPage = () => {
-  const { user } = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

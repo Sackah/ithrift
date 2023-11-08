@@ -1,23 +1,22 @@
+import AllItemsList from "../components/lists/AllItemsList";
 import HomePageNav from "../components/nav/HomePageNav";
 import Loading from "../components/partials/Loading";
 import Error from "../components/partials/Error";
 import useFetch from "../customHooks/useFetch";
-import ItemList from "../components/lists/PersonalItemsList";
-import "../pages/styles/MyCollection.css";
+import "../pages/styles/Home.css";
 
-const MyCollection = () => {
-  const { error, isPending, data } = useFetch(
+const HomePage = () => {
+  const { data, isPending, error } = useFetch(
     "https://jsonplaceholder.typicode.com/tod/1" //a wrong end point
   );
-
   return (
     <>
       <HomePageNav />
-      {data && <ItemList items={data} />}
+      {data && <AllItemsList items={data} />}
       {isPending && <Loading />}
-      {error && <Error message={"You have no items on iThrift yet."} />}
+      {error && <Error message={error.message} />}
     </>
   );
 };
 
-export default MyCollection;
+export default HomePage;
