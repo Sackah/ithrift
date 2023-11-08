@@ -1,18 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-type items = {
-  id: number;
+export type items = {
+  id: string;
   itemName: string;
   image: string;
   price: string;
 };
 
-type UserState = {
+export type UserState = {
   id: number;
   username: string;
   items: items[];
 } | null;
 
-const initialState: UserState = null;
+const initialState: UserState = {
+  id: 0,
+  username: "",
+  items: [],
+};
 
 const userSlice = createSlice({
   name: "user",
@@ -22,7 +26,7 @@ const userSlice = createSlice({
       state = action.payload;
     },
     logout: (state) => {
-      state = null;
+      state = { id: 0, username: "", items: [] };
     },
   },
 });
