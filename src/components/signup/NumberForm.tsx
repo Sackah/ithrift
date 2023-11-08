@@ -15,7 +15,7 @@ const NumberForm = (props: SignUpFormProps) => {
 
     const formData = new FormData();
     formData.append("username", username);
-    formData.append("phone-number", number);
+    formData.append("phone-number", `+233${number}`);
 
     axios
       .post("https://jsonplaceholder.typicode.com/todos/1", formData)

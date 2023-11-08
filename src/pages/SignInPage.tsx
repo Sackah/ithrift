@@ -17,7 +17,7 @@ const SignInPage = () => {
     setIsLoggingIn(true);
 
     const formData = new FormData();
-    formData.append("phone-number", credentials.number);
+    formData.append("phone-number", `+233${credentials.number}`);
     formData.append("password", credentials.password);
 
     axios
