@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { SignUpFormProps } from "../../types/types";
 import axios from "axios";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const OTPForm = (props: SignUpFormProps) => {
   const [otp, setOtp] = useState("");
   const [error, setError] = useState<null | any>(null);
   const [isPending, setIsPending] = useState(false);
   const { changeForm } = props;
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,12 +23,13 @@ const OTPForm = (props: SignUpFormProps) => {
         setIsPending(false);
         setError(null);
         changeForm();
-        <Navigate to={"/home"} />;
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error);
         setIsPending(false);
         setError("Please try again");
+        navigate("/personal"); //REMOVE THIS
       });
 
     changeForm(); //REMOVE THIS

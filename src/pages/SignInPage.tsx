@@ -2,7 +2,7 @@ import "./styles/SignIn.css";
 import logo from "../assets/20231105_165612.png";
 import { useState } from "react";
 import axios from "axios";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
   const [credentials, setCredentials] = useState({
@@ -11,6 +11,7 @@ const SignInPage = () => {
   });
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [error, setError] = useState<null | string>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -26,7 +27,7 @@ const SignInPage = () => {
         console.log(response.data);
         setIsLoggingIn(false);
         setError(null);
-        <Navigate to={"/personal"} />;
+        navigate("/personal");
       })
       .catch((error) => {
         console.log(error);
@@ -34,6 +35,7 @@ const SignInPage = () => {
         setError("Credentials may be incorrect!");
       });
 
+    navigate("/personal"); //REMOVE THIS
     console.log("Submit!");
   };
 
