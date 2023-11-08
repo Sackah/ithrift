@@ -7,7 +7,7 @@ const HomePageNav = () => {
 
   return (
     <>
-      {isMobile && <MobileHomePageNav />}
+      {isMobile && <MobileHomePageNav/>}
       {!isMobile && <DesktopHomePageNav />}
     </>
   );

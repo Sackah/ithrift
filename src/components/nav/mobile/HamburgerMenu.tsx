@@ -7,6 +7,7 @@ const HamburgerMenu = (props: HamburgerMenuProps) => {
     <div
       className={`menu-icon ${isDropDownActive ? "drop-down-active" : ""}`}
       onClick={toggleMenu}
+      data-testid="hamburger-menu-button"
     >
       <span></span>
       <span></span>
@@ -14,5 +15,7 @@ const HamburgerMenu = (props: HamburgerMenuProps) => {
     </div>
   );
 };
+
+
 
 export default HamburgerMenu;
