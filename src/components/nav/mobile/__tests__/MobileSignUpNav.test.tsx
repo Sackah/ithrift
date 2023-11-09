@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, RenderResult, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
+import { BrowserRouter } from 'react-router-dom';
 import MobileSignUpNav from '../MobileSignUpNav';
 
 describe('MobileSignUpNav Component', () => {
