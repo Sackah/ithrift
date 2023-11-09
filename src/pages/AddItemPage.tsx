@@ -7,15 +7,20 @@ type Change = React.ChangeEvent<HTMLInputElement>;
 const AddItemPage = () => {
   const [itemName, setItemName] = useState("");
   const [itemDescription, setItemDescription] = useState("");
-  const [images, setImages] = useState<FileList | null>(null);
+  const [images, setImages] = useState<File[]>([]);
   const [price, setPrice] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const handleImageChange = (event: Change) => {
-    if (event.target.files && event.target.files.length > 3) {
-      alert("You can only upload up to 3 images");
-    } else {
-      setImages(event.target.files);
+    if (event.target.files) {
+      let selectedFiles;
+      if (event.target.files.length > 3) {
+        alert("You can only upload up to 3 images");
+        event.target.value = "";
+      } else {
+        selectedFiles = Array.from(event.target.files);
+        setImages(selectedFiles);
+      }
     }
   };
 
@@ -27,11 +32,9 @@ const AddItemPage = () => {
     formData.append("itemDescription", itemDescription);
     formData.append("price", price);
 
-    if (images) {
-      for (let i = 0; i < images.length; i++) {
-        formData.append("images", images[i]);
-      }
-    }
+    images.forEach((image, index) => {
+      formData.append(`images[${index}]`, image);
+    });
 
     axios
       .post("https://jsonplaceholder.typicode.com/tod/1", formData, {
