@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { SignUpFormProps } from "../../types/types";
-import axios from "axios";
+import { BASE_URL } from "../../config";
 
 const NumberForm = (props: SignUpFormProps) => {
   const [credentials, setCredentials] = useState({
-    number: "",
-    username: "",
+    phone: "",
+    name: "",
     password: "",
-    passwordConfirm: "",
+    confirmPassword: "",
   });
   const [error, setError] = useState<null | any>(null);
   const [isPending, setIsPending] = useState(false);
@@ -17,31 +17,33 @@ const NumberForm = (props: SignUpFormProps) => {
     event.preventDefault();
     setIsPending(true);
 
-    if (credentials.passwordConfirm !== credentials.password) {
-      setError("Passwords does not match!");
+    if (credentials.confirmPassword !== credentials.password) {
+      setError("Passwords do not match!");
+      setIsPending(false);
+    } else if (credentials.phone.length !== 9) {
+      setError("Number should be 9 digits");
+      setIsPending(false);
     } else {
-      const formData = new FormData();
-      formData.append("username", credentials.username);
-      formData.append("phone-number", `+233${credentials.number}`);
-      formData.append("password", credentials.password);
-
-      axios
-        .post("https://jsonplaceholder.typicode.com/todos/1", formData)
-        .then((response) => {
-          console.log(response.data);
+      fetch(`${BASE_URL}auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
+      })
+        .then((res) => {
+          console.log(res);
           setIsPending(false);
           setError(null);
           changeForm();
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
           setIsPending(false);
-          setError("Phone number not found");
+          setError(err.message);
         });
     }
 
-    changeForm(); // REMOVE THIS
-    console.log("nnn");
+    //changeForm(); // REMOVE THIS
+    console.log("Sign up!");
   };
 
   const handleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +52,7 @@ const NumberForm = (props: SignUpFormProps) => {
     if (value.length <= 9) {
       setCredentials((prevState) => ({
         ...prevState,
-        number: value,
+        phone: value,
       }));
     }
   };
@@ -58,7 +60,7 @@ const NumberForm = (props: SignUpFormProps) => {
   const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials((prevState) => ({
       ...prevState,
-      username: event.target.value,
+      name: event.target.value,
     }));
   };
 
@@ -74,7 +76,7 @@ const NumberForm = (props: SignUpFormProps) => {
   ) => {
     setCredentials((prevState) => ({
       ...prevState,
-      passwordConfirm: event.target.value,
+      confirmPassword: event.target.value,
     }));
   };
 
@@ -89,7 +91,7 @@ const NumberForm = (props: SignUpFormProps) => {
           type="text"
           id="username"
           placeholder="what would you like us to call you?"
-          value={credentials.username}
+          value={credentials.name}
           onChange={handleUserNameChange}
           required
         />
@@ -102,7 +104,7 @@ const NumberForm = (props: SignUpFormProps) => {
             type="number"
             id="signup-number"
             pattern="[0-9]{9}"
-            value={credentials.number}
+            value={credentials.phone}
             title="Please enter a 9-digit number"
             maxLength={9}
             onChange={handleNumberChange}
@@ -127,7 +129,7 @@ const NumberForm = (props: SignUpFormProps) => {
           type="password"
           id="confirm"
           onChange={handleConfirmPassWordChange}
-          value={credentials.passwordConfirm}
+          value={credentials.confirmPassword}
           placeholder="confirm password"
         />
         {!isPending && <button>Sign Up</button>}

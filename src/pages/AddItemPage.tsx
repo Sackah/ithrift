@@ -1,52 +1,69 @@
 import { useState } from "react";
 import "../pages/styles/AddItem.css";
+import { BASE_URL } from "../config";
 import axios from "axios";
 
 type Change = React.ChangeEvent<HTMLInputElement>;
 
 const AddItemPage = () => {
-  const [itemName, setItemName] = useState("");
-  const [itemDescription, setItemDescription] = useState("");
-  const [images, setImages] = useState<File[]>([]);
-  const [price, setPrice] = useState("");
+  const [details, setDetails] = useState({
+    name: "",
+    description: "",
+    imageUrl: "",
+    price: "",
+  });
   const [error, setError] = useState<string | null>(null);
 
   const handleImageChange = (event: Change) => {
     if (event.target.files) {
-      let selectedFiles;
-      if (event.target.files.length > 3) {
-        alert("You can only upload up to 3 images");
-        event.target.value = "";
-      } else {
-        selectedFiles = Array.from(event.target.files);
-        setImages(selectedFiles);
-      }
+      const image = new FormData();
+      image.append("file", event.target.files[0]);
+      axios
+        .post(`${BASE_URL}upload`, image)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
+  };
+
+  const handleItemChange = (event: Change) => {
+    setDetails((prev) => ({
+      ...prev,
+      name: event.target.value,
+    }));
+  };
+
+  const handleDescriptionChange = (event: Change) => {
+    setDetails((prev) => ({
+      ...prev,
+      description: event.target.value,
+    }));
+  };
+
+  const handlePriceChange = (event: Change) => {
+    setDetails((prev) => ({
+      ...prev,
+      price: event.target.value,
+    }));
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const formData = new FormData();
-    formData.append("itemname", itemName);
-    formData.append("itemDescription", itemDescription);
-    formData.append("price", price);
-
-    images.forEach((image, index) => {
-      formData.append(`images[${index}]`, image);
-    });
-
-    axios
-      .post("https://jsonplaceholder.typicode.com/tod/1", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+    fetch(`${BASE_URL}items`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(details),
+    })
+      .then((res) => {
+        return res.json();
       })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        setError(error.message);
+      .catch((err) => {
+        setError(error);
       });
   };
 
@@ -55,32 +72,28 @@ const AddItemPage = () => {
       {error && <p className="error">{error}</p>}
       <h5>Upload an item</h5>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="itemName">Name:</label>
+        <label htmlFor="itemName">Item Name:</label>
         <input
           type="text"
           id="itemName"
-          onChange={(e: Change) => {
-            setItemName(e.target.value);
-          }}
+          onChange={handleItemChange}
           required
-          value={itemName}
+          value={details.name}
         />
         <label htmlFor="description">Description:</label>
         <input
           type="text"
           id="description"
           required
-          onChange={(e: Change) => {
-            setItemDescription(e.target.value);
-          }}
-          value={itemDescription}
+          onChange={handleDescriptionChange}
+          value={details.description}
         />
         <label htmlFor="images">Add an image:</label>
         <input
           type="file"
+          name="file"
           id="images"
           accept="image/*"
-          multiple
           required
           onChange={handleImageChange}
         />
@@ -89,10 +102,8 @@ const AddItemPage = () => {
           type="number"
           id="price"
           placeholder="Free, let's go green!"
-          onChange={(e: Change) => {
-            setPrice(e.target.value);
-          }}
-          value={price}
+          onChange={handlePriceChange}
+          value={details.price}
         />
         <button>Send to iThrift</button>
       </form>

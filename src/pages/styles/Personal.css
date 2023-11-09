@@ -77,7 +77,8 @@
 }
 
 .mobile-home-page-nav{
-    position: absolute;
+    position: fixed;
+    background-color: #fff;
     bottom: 0;
     width: 100%;
     display: flex;

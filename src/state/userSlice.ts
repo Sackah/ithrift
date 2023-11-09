@@ -1,36 +1,69 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { BASE_URL } from "../config";
+
 export type item = {
   id: string;
-  itemName: string;
-  images: string[];
+  name: string;
+  imageUrl: string;
+  description: string;
+  userId: string;
   price: string;
 };
 
-export type UserState = {
+export type UserData = {
   id: number;
-  username: string;
-  items: item[];
-} | null;
+  name: string;
+  phone: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UserState = {
+  data: UserData | null;
+};
 
 const initialState: UserState = {
-  id: 0,
-  username: "",
-  items: [],
+  data: null,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action) => {
-      state = action.payload;
-    },
     logout: (state) => {
-      state = { id: 0, username: "", items: [] };
+      state = { data: null };
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(login.pending, (state) => {
+      console.log("loading");
+    });
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.data = action.payload;
+    });
+    builder.addCase(login.rejected, (state, action) => {
+      state.data = null;
+    });
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const login = createAsyncThunk(
+  "user/login",
+  async (accessToken: string) => {
+    const response = await fetch(`${BASE_URL}users/me`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (response.status >= 200 && response.status < 300) {
+      return response.json();
+    } else {
+      throw new Error("Failed to fetch user data");
+    }
+  }
+);
+
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;

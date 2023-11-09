@@ -136,15 +136,21 @@ footer{
         font-size: 2rem;
         width: 85%;
     }
+
     .sign-up-container form{
         width: 85%;
     }
+
     .sign-up-section1 h3{
-        font-size: 4rem;
+        font-size: 3.6rem;
     }
     
     .sign-up-section1 p{
         margin-left: 30px;
         font-size: 1.1rem;
+    }
+
+    .sign-up-section1 br{
+        display: none;
     }
 }

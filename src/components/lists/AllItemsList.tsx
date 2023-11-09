@@ -15,11 +15,11 @@ const AllItemsList = (props: AllItemsListProps) => {
       {props.items.map((item) => (
         <Link to={`/items/${item.id}`}>
           <div className="item-container" key={item.id}>
-            <h5>{item.itemName}</h5>
+            <h5>{item.name}</h5>
             <div className="image-container">
-              <img src={item.images[0]} alt={item.itemName} />
+              <img src={item.imageUrl} alt={item.name} />
             </div>
-            <p>Uploaded by: {user.username}</p>
+            <p>Uploaded by: {user?.data?.name}</p>
           </div>
         </Link>
       ))}

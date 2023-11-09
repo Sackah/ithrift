@@ -13,8 +13,8 @@ const PersonalPage = () => {
   const dispatch = useDispatch();
 
   const handleLogout = (event: React.MouseEvent<HTMLDivElement>) => {
-    dispatch(logout);
-    localStorage.removeItem("token");
+    dispatch(logout());
+    localStorage.removeItem("ACCESS_TOKEN_KEY");
     navigate("/");
   };
 
@@ -25,7 +25,7 @@ const PersonalPage = () => {
         <i className="fa-solid fa-right-from-bracket"></i>
         Logout
       </div>
-      <h3>Welcome {user.username}</h3>
+      <h3>Welcome {user?.data?.name}</h3>
       <div>
         <p>Browse my items: </p>
         <Link to={"/mycollection"}>
