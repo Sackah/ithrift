@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useFetch = (url: string) => {
+const useFetch = (initialUrl: string) => {
   const [data, setData] = useState<null | any>(null);
   const [isPending, setIsPending] = useState<boolean>(true);
   const [error, setError] = useState<null | any>(null);
+  const [url, setUrl] = useState(initialUrl);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -28,7 +29,9 @@ const useFetch = (url: string) => {
     return () => source.cancel();
   }, [url]);
 
-  return { data, isPending, error };
+  const refetch = (newUrl: string) => setUrl(newUrl);
+
+  return { data, isPending, error, refetch };
 };
 
 export default useFetch;
