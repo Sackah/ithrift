@@ -11,6 +11,9 @@ export type item = {
   userName: string;
   createdAt: string;
   updatedAt: string;
+  user?: {
+    name: string;
+  };
 };
 
 export type UserData = {
