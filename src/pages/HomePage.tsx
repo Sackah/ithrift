@@ -8,11 +8,11 @@ import { useState } from "react";
 
 const HomePage = () => {
   const [query, setQuery] = useState("");
-  const { data, isPending, error, refetch } = useFetch(`items`);
+  const { data, isPending, error, refetch } = useFetch(`items?search=${query}`);
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    refetch(`/item/search=${query}`);
+    refetch(`items?search=${query}`);
   };
 
   return (
@@ -31,7 +31,7 @@ const HomePage = () => {
       </form>
       {data && <AllItemsList items={data} />}
       {isPending && <Loading />}
-      {error && <Error message={error.message} />}
+      {error && <Error message={error} />}
     </div>
   );
 };

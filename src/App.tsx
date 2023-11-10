@@ -5,37 +5,56 @@ import PersonalPage from "./pages/PersonalPage";
 import MyCollection from "./pages/MyCollection";
 import AddItemPage from "./pages/AddItemPage";
 import HomePage from "./pages/HomePage";
+import NotFound from "./pages/NotFound";
+import UseAuth from "./components/auth/UseAuth";
+import ItemDetails from "./pages/ItemDetails";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<SignUpPage />} />
       <Route path="/signin" element={<SignInPage />} />
-      <Route path="/personal" element={<PersonalPage />} />
-      <Route path="/mycollection" element={<MyCollection />} />
-      <Route path="/additem" element={<AddItemPage />} />
-      <Route path="/home" element={<HomePage />} />
-
-      {/* <Switch>
-        
-        <Route path="/personal" element={
+      <Route
+        path="/personal"
+        element={
           <UseAuth>
             <PersonalPage />
           </UseAuth>
-        }/>
-        <Route path="/additem">
-          <AddItem />
-        </Route>
-        <Route path="/mycollection">
-          <MyCollection />
-        </Route>
-        <Route path="/items/:id">
-          <ItemDetails /> //add a WithAuth/UseAuth HOC
-        </Route>
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch> */}
+        }
+      />
+      <Route
+        path="/mycollection"
+        element={
+          <UseAuth>
+            <MyCollection />
+          </UseAuth>
+        }
+      />
+      <Route
+        path="/additem"
+        element={
+          <UseAuth>
+            <AddItemPage />
+          </UseAuth>
+        }
+      />
+      <Route
+        path="/home"
+        element={
+          <UseAuth>
+            <HomePage />
+          </UseAuth>
+        }
+      />
+      <Route
+        path="/items/:id"
+        element={
+          <UseAuth>
+            <ItemDetails />
+          </UseAuth>
+        }
+      />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

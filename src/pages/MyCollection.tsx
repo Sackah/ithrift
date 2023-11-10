@@ -6,12 +6,12 @@ import ItemList from "../components/lists/PersonalItemsList";
 import "../pages/styles/MyCollection.css";
 
 const MyCollection = () => {
-  const { error, isPending, data } = useFetch("users/items");
+  const { error, isPending, data, refetch } = useFetch("users/items");
 
   return (
     <>
       <HomePageNav />
-      {data && <ItemList items={data} />}
+      {data && <ItemList items={data} refetch={refetch} />}
       {isPending && <Loading />}
       {error && <Error message={error} />}
     </>

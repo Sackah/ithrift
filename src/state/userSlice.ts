@@ -8,6 +8,9 @@ export type item = {
   description: string;
   userId: string;
   price: string;
+  userName: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UserData = {

@@ -13,7 +13,9 @@ const UseAuth = ({ children }: useAuthProps) => {
     }
   }, []);
 
-  return children;
+  const token = localStorage.getItem("ACCESS_TOKEN_KEY");
+
+  return token ? <>{children}</> : null;
 };
 
 export default UseAuth;

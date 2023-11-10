@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { item } from "../../state/userSlice";
-import { RootState } from "../../state/store";
 import { Link } from "react-router-dom";
 
 type AllItemsListProps = {
@@ -8,8 +7,6 @@ type AllItemsListProps = {
 };
 
 const AllItemsList = (props: AllItemsListProps) => {
-  const user = useSelector((state: RootState) => state.user);
-
   return (
     <div className="all-items">
       {props.items.map((item) => (
@@ -19,7 +16,7 @@ const AllItemsList = (props: AllItemsListProps) => {
             <div className="image-container">
               <img src={item.imageUrl} alt={item.name} />
             </div>
-            <p>Uploaded by: {user?.data?.name}</p>
+            <p>Uploaded by: {item.userName}</p>
           </div>
         </Link>
       ))}

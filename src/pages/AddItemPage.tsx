@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../pages/styles/AddItem.css";
 import { BASE_URL } from "../config";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 type Change = React.ChangeEvent<HTMLInputElement>;
 
@@ -13,18 +14,28 @@ const AddItemPage = () => {
     price: "",
   });
   const [error, setError] = useState<string | null>(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const navigate = useNavigate();
 
   const handleImageChange = (event: Change) => {
     if (event.target.files) {
+      setIsButtonDisabled(true);
       const image = new FormData();
       image.append("file", event.target.files[0]);
       axios
         .post(`${BASE_URL}upload`, image)
         .then((res) => {
           console.log(res.data);
+          setDetails((prev) => ({
+            ...prev,
+            imageUrl: res.data.fileUrl.split(" ").join("%20"),
+          }));
+          setIsButtonDisabled(false);
         })
         .catch((err) => {
           console.log(err);
+          setError(err);
+          setIsButtonDisabled(false);
         });
     }
   };
@@ -46,24 +57,32 @@ const AddItemPage = () => {
   const handlePriceChange = (event: Change) => {
     setDetails((prev) => ({
       ...prev,
-      price: event.target.value,
+      price: event.target.value === "" ? "0.00" : event.target.value,
     }));
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
+    console.log(details);
     fetch(`${BASE_URL}items`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(details),
     })
       .then((res) => {
+        if (!res.ok) {
+          setError("Failed to submit!");
+        } else {
+          navigate("/home");
+        }
         return res.json();
       })
       .catch((err) => {
-        setError(error);
+        setError(err.message);
       });
   };
 
@@ -103,9 +122,9 @@ const AddItemPage = () => {
           id="price"
           placeholder="Free, let's go green!"
           onChange={handlePriceChange}
-          value={details.price}
+          value={details.price === "0.00" ? "" : details.price}
         />
-        <button>Send to iThrift</button>
+        <button disabled={isButtonDisabled}>Send to iThrift</button>
       </form>
     </div>
   );

@@ -1,2 +1,2 @@
-export const BASE_URL = "https://c4bb-196-61-44-226.ngrok-free.app/";
+export const BASE_URL = "https://90c6-154-160-27-93.ngrok-free.app/";
 export const ACCESS_TOKEN_KEY = "accessToken";

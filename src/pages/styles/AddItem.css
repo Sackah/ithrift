@@ -53,6 +53,11 @@
     justify-content: center;
 }
 
+.add-item button:disabled, .add-item button:disabled:hover{
+    color: #1b2e34 !important;
+    opacity: 0.6;
+}
+
 /* TABLET DISPLAY */
 @media only screen and (max-width: 1000px){
     .add-item h5{
