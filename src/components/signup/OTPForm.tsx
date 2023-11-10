@@ -34,6 +34,8 @@ const OTPForm = (props: SignUpFormProps) => {
         setError(err.message);
       });
 
+    navigate("/signin");
+
     console.log("rrr");
   };
 
