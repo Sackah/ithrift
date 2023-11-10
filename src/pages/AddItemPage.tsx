@@ -25,7 +25,6 @@ const AddItemPage = () => {
       axios
         .post(`${BASE_URL}upload`, image)
         .then((res) => {
-          console.log(res.data);
           setDetails((prev) => ({
             ...prev,
             imageUrl: res.data.fileUrl.split(" ").join("%20"),
@@ -64,7 +63,6 @@ const AddItemPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
-    console.log(details);
     fetch(`${BASE_URL}items`, {
       method: "POST",
       headers: {

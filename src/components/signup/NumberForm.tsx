@@ -42,7 +42,6 @@ const NumberForm = (props: SignUpFormProps) => {
         });
     }
 
-    //changeForm(); // REMOVE THIS
     console.log("Sign up!");
   };
 

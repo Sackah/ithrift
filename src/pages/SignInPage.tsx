@@ -44,7 +44,6 @@ const SignInPage = () => {
         setError(err.message);
       });
 
-    //navigate("/personal"); //REMOVE THIS
     console.log("Submit!");
   };
 
