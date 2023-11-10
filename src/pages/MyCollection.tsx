@@ -6,16 +6,14 @@ import ItemList from "../components/lists/PersonalItemsList";
 import "../pages/styles/MyCollection.css";
 
 const MyCollection = () => {
-  const { error, isPending, data } = useFetch(
-    "https://jsonplaceholder.typicode.com/tod/1" //a wrong end point
-  );
+  const { error, isPending, data, refetch } = useFetch("users/items");
 
   return (
     <>
       <HomePageNav />
-      {data && <ItemList items={data} />}
+      {data && <ItemList items={data} refetch={refetch} />}
       {isPending && <Loading />}
-      {error && <Error message={"You have no items on iThrift yet."} />}
+      {error && <Error message={error} />}
     </>
   );
 };

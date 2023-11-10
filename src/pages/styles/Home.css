@@ -21,9 +21,46 @@
     height: auto;
 }
 
+.home-page form{
+    width: 40%;
+    margin: auto;
+}
+
+.home-page input[type=search]{
+    padding: 12px 22px;
+    width: 90%;
+    border: 1px solid #000;
+    outline: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.home-page form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-page form button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border: 0;
+    cursor: pointer;
+    width: 10%;
+    font-size: 1.2rem;
+}
+
 @media only screen and (max-width: 1000px){
     .all-items{
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .home-page form{
+        width: 70%;
     }
 }
 
@@ -32,5 +69,9 @@
 @media only screen and (max-width: 600px){
     .all-items{
         grid-template-columns: 1fr;
+    }
+
+    .home-page form{
+        width: 80%;
     }
 }

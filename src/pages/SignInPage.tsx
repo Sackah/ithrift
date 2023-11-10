@@ -1,45 +1,49 @@
 import "./styles/SignIn.css";
 import logo from "../assets/20231105_165612.png";
 import { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../state/userSlice";
+import { AppDispatch } from "../state/store";
+import { BASE_URL } from "../config";
 
 const SignInPage = () => {
   const [credentials, setCredentials] = useState({
-    number: "",
+    phone: "",
     password: "",
   });
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [error, setError] = useState<null | string>(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoggingIn(true);
 
-    const formData = new FormData();
-    formData.append("phone-number", `+233${credentials.number}`);
-    formData.append("password", credentials.password);
-
-    axios
-      .post("https://jsonplaceholder.typicode.com/todos/1", formData)
-      .then((response) => {
-        console.log(response.data);
-        setIsLoggingIn(false);
-        setError(null);
-        dispatch(login(response.data.user));
-        navigate("/personal");
+    fetch(`${BASE_URL}auth/signin`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    })
+      .then((res) => {
+        return res.json();
       })
-      .catch((error) => {
-        console.log(error);
+      .then((data) => {
+        if (data.accessToken) {
+          localStorage.setItem("ACCESS_TOKEN_KEY", data.accessToken);
+          dispatch(login(data.accessToken));
+          navigate("/personal");
+        }
         setIsLoggingIn(false);
-        setError("Credentials may be incorrect!");
+        setError(data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoggingIn(false);
+        setError(err.message);
       });
 
-    navigate("/personal"); //REMOVE THIS
     console.log("Submit!");
   };
 
@@ -49,7 +53,7 @@ const SignInPage = () => {
     if (value.length <= 9) {
       setCredentials((prevState) => ({
         ...prevState,
-        number: value,
+        phone: value,
       }));
     }
   };
@@ -76,7 +80,7 @@ const SignInPage = () => {
               type="number"
               id="phone-number"
               pattern="[0-9]{9}"
-              value={credentials.number}
+              value={credentials.phone}
               title="Please enter a 9-digit number"
               maxLength={9}
               onChange={handleNumberChange}

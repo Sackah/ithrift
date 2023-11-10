@@ -1,5 +1,5 @@
 export type useAuthProps = {
-  children: React.Component;
+  children: React.ReactNode;
 };
 export type HamburgerMenuProps = {
   isDropDownActive: boolean;

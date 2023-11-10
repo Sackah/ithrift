@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { SignUpFormProps } from "../../types/types";
-import axios from "axios";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { login } from "../../state/userSlice";
+import { AppDispatch } from "../../state/store";
+import { BASE_URL } from "../../config";
 
 const OTPForm = (props: SignUpFormProps) => {
   const [otp, setOtp] = useState("");
@@ -11,32 +12,28 @@ const OTPForm = (props: SignUpFormProps) => {
   const [isPending, setIsPending] = useState(false);
   const { changeForm } = props;
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append("otp", otp);
-
-    axios
-      .post("https://jsonplaceholder.typicode.com/todos/1", formData)
-      .then((response) => {
-        console.log(response.data);
+    fetch(`${BASE_URL}auth/otp`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ otp }),
+    })
+      .then((res) => {
+        console.log(res);
         setIsPending(false);
         setError(null);
-        dispatch(login(response.data.user));
         changeForm();
-        navigate("/home");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
         setIsPending(false);
-        setError("Please try again");
-        navigate("/personal"); //REMOVE THIS
+        setError(err.message);
       });
 
-    changeForm(); //REMOVE THIS
     console.log("rrr");
   };
 

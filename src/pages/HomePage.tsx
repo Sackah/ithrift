@@ -8,13 +8,11 @@ import { useState } from "react";
 
 const HomePage = () => {
   const [query, setQuery] = useState("");
-  const { data, isPending, error, refetch } = useFetch(
-    `https://jsonplaceholder.typicode.com/toos?item=${query}` //a wrong end point
-  );
+  const { data, isPending, error, refetch } = useFetch(`items?search=${query}`);
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    refetch(`https://jsonplaceholder.typicode.com/toos?item=${query}`);
+    refetch(`items?search=${query}`);
   };
 
   return (
@@ -22,16 +20,18 @@ const HomePage = () => {
       <HomePageNav />
       <form onSubmit={handleSearch}>
         <input
-          type="text"
+          type="search"
           placeholder="Search by name..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button type="submit">Search</button>
+        <button aria-label="search">
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </button>
       </form>
       {data && <AllItemsList items={data} />}
       {isPending && <Loading />}
-      {error && <Error message={error.message} />}
+      {error && <Error message={error} />}
     </div>
   );
 };

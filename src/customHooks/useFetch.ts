@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { BASE_URL } from "../config";
 
 const useFetch = (initialUrl: string) => {
   const [data, setData] = useState<null | any>(null);
@@ -8,25 +8,38 @@ const useFetch = (initialUrl: string) => {
   const [url, setUrl] = useState(initialUrl);
 
   useEffect(() => {
-    const source = axios.CancelToken.source();
+    const abortCont = new AbortController();
+    const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
 
-    axios
-      .get(url, { cancelToken: source.token })
+    fetch(`${BASE_URL}${url}`, {
+      signal: abortCont.signal,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
       .then((res) => {
+        if (!res.ok) {
+          throw Error("could not fetch the data for that resource");
+        }
+        return res.json();
+      })
+      .then((data) => {
         setIsPending(false);
-        setData(res.data);
+        setData(data);
         setError(null);
       })
       .catch((err) => {
-        if (axios.isCancel(err)) {
-          console.log("aborted fetch");
+        if (err.name === "AbortError") {
+          console.log("fetch aborted");
         } else {
           setIsPending(false);
-          setError(err);
+          setError(err.message);
         }
       });
 
-    return () => source.cancel();
+    return () => {
+      abortCont.abort();
+    };
   }, [url]);
 
   const refetch = (newUrl: string) => setUrl(newUrl);
