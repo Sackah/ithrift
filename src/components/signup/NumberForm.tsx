@@ -1,11 +1,6 @@
 import { useState } from "react";
 import { SignUpFormProps } from "../../types/types";
-<<<<<<< HEAD
-import axios from "axios";
-//const axios = require('axios');
-=======
 import { BASE_URL } from "../../config";
->>>>>>> bc3f36071e18f938204b1d0cb2bb13e7d5d3410f
 
 const NumberForm = (props: SignUpFormProps) => {
   const [credentials, setCredentials] = useState({
