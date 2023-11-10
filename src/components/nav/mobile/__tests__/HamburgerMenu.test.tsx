@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, RenderResult } from '@testing-library/react';
-import HamburgerMenu, { HamburgerMenuProps } from '../HamburgerMenu'; 
+import HamburgerMenu, { HamburgerMenuProps} from '../HamburgerMenu'; 
 
 describe('HamburgerMenu Component', () => {
   const mockToggleMenu = jest.fn();
