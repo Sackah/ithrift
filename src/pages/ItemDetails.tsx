@@ -20,9 +20,7 @@ const ItemDetails = () => {
             <div className="image-container">
               <img src={itemData.imageUrl} alt={itemData.name} />
             </div>
-            <p>
-              Uploaded by: {itemData.userName} on {itemData.createdAt}
-            </p>
+            <p>Uploaded on {itemData.createdAt}</p>
           </div>
         </div>
       )}
