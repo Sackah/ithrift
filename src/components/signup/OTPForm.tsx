@@ -26,7 +26,6 @@ const OTPForm = (props: SignUpFormProps) => {
         console.log(res);
         setIsPending(false);
         setError(null);
-        changeForm();
       })
       .catch((err) => {
         console.log(err);
@@ -35,7 +34,7 @@ const OTPForm = (props: SignUpFormProps) => {
       });
 
     navigate("/signin");
-
+    changeForm();
     console.log("rrr");
   };
 
