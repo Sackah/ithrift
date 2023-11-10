@@ -9,9 +9,13 @@ type ItemListProps = {
 };
 
 const ItemList = (props: ItemListProps) => {
+  const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
   const handleDelete = (id: string) => {
     fetch(`${BASE_URL}items/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     })
       .then((res) => {
         return res.json();

@@ -16,7 +16,7 @@ const AllItemsList = (props: AllItemsListProps) => {
             <div className="image-container">
               <img src={item.imageUrl} alt={item.name} />
             </div>
-            <p>Uploaded by: {item.userName}</p>
+            <p>Uploaded by: {item.user?.name}</p>
           </div>
         </Link>
       ))}
