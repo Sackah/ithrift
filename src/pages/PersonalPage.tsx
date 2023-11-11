@@ -12,7 +12,7 @@ const PersonalPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogout = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleLogout = () => {
     dispatch(logout());
     localStorage.removeItem("ACCESS_TOKEN_KEY");
     navigate("/");

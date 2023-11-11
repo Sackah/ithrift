@@ -1,6 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BASE_URL } from "../config";
 
+export type UserData = {
+  id: number;
+  name: string;
+  phone: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type item = {
   id: string;
   name: string;
@@ -11,17 +19,7 @@ export type item = {
   userName: string;
   createdAt: string;
   updatedAt: string;
-  user?: {
-    name: string;
-  };
-};
-
-export type UserData = {
-  id: number;
-  name: string;
-  phone: string;
-  createdAt: string;
-  updatedAt: string;
+  user?: UserData;
 };
 
 export type UserState = {
@@ -37,7 +35,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state = { data: null };
+      state.data = null;
     },
   },
   extraReducers: (builder) => {

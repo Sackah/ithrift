@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { item } from "../../state/userSlice";
 import { Link } from "react-router-dom";
 

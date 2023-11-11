@@ -33,7 +33,7 @@ const AddItemPage = () => {
         })
         .catch((err) => {
           console.log(err);
-          setError(err);
+          setError(err.message);
           setIsButtonDisabled(false);
         });
     }

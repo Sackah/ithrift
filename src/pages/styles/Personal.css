@@ -3,6 +3,8 @@
     --fontFamily-print: "Georgia","Times New Roman","Times",serif;
     --fontFamily-mono: "Consolas",monospace;
     --header-background: #f7f6f2;
+    --main-green: #1b2c33;
+    --second-green: #3d6668;
 }
 
 .personal-page{
@@ -14,7 +16,7 @@
 
 .personal-page .fa-right-from-bracket{
     font-size: 2rem;
-    color: crimson;
+    color: var(--second-green);
 }
 
 .logout-wrapper{
@@ -33,7 +35,7 @@
     text-align: center;
     margin-top: 6%;
     margin-bottom: 4%;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-family: var(--fontFamily-mono);
 }
 
@@ -42,20 +44,19 @@
 }
 
 .personal-page p{
-    /* text-align: left */
     font-family: var(--fontFamily-base);
     margin-bottom: 15px;
+    font-size: 1.1rem;
 }
 
 .personal-page button{
-    /* padding: 15px 112px; */
     padding-top: 15px;
     padding-bottom: 15px;
     width: 300px;
     border: none;
-    border-radius: 3px;
+    border-radius: 6px;
     color: #fff;
-    background-color: crimson;
+    background-color: var(--main-green);
     font-size: 1rem;
     font-weight: 700;
     margin-bottom: 4%;
@@ -104,8 +105,22 @@
     justify-content: center;
 }
 
-.mobile-home-page-nav .active, .desktop-homepage-nav .active{
-    color: crimson;
+.mobile-home-page-nav a{
+    color: #68737d;
+}
+
+.mobile-home-page-nav .active{
+    color: var(--main-green);
+}
+
+.desktop-homepage-nav a{
+    padding: 8px 14px;
+}
+
+.desktop-homepage-nav .active{
+    color: #fff;
+    background: var(--second-green);
+    border-radius: 6px;
 }
 
 .mobile-home-page-nav .fa-solid{
@@ -147,6 +162,7 @@
 /* TABLET DISPLAY */
 @media only screen and (max-width: 1000px){
     .personal-page h3{
+        font-size: 2rem;
         margin-top: 20%;
         margin-bottom: 20%;
     }

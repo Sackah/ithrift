@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import { item } from "../../state/userSlice";
 import Error from "../partials/Error";
 import { BASE_URL } from "../../config";
