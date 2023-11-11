@@ -17,6 +17,12 @@ const OTPForm = (props: SignUpFormProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (!otp.trim()) {
+      setError("Field cannot be empty");
+      setIsPending(false);
+      return;
+    }
+
     fetch(`${BASE_URL}auth/otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -35,7 +41,6 @@ const OTPForm = (props: SignUpFormProps) => {
 
     navigate("/signin");
     changeForm();
-    console.log("rrr");
   };
 
   const handleOtpChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -17,30 +17,46 @@ const NumberForm = (props: SignUpFormProps) => {
     event.preventDefault();
     setIsPending(true);
 
+    if (!credentials.name.trim()) {
+      setError("Name cannot be empty");
+      setIsPending(false);
+      return;
+    }
+
+    if (!/^[a-zA-Z\s]*$/.test(credentials.name)) {
+      setError("Name can only contain letters and spaces");
+      setIsPending(false);
+      return;
+    }
+
     if (credentials.confirmPassword !== credentials.password) {
       setError("Passwords do not match!");
       setIsPending(false);
-    } else if (credentials.phone.length !== 9) {
+      return;
+    }
+
+    if (credentials.phone.length !== 9) {
       setError("Number should be 9 digits");
       setIsPending(false);
-    } else {
-      fetch(`${BASE_URL}auth/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
-      })
-        .then((res) => {
-          console.log(res);
-          setIsPending(false);
-          setError(null);
-          changeForm();
-        })
-        .catch((err) => {
-          console.log(err);
-          setIsPending(false);
-          setError(err.message);
-        });
+      return;
     }
+
+    fetch(`${BASE_URL}auth/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    })
+      .then((res) => {
+        console.log(res);
+        setIsPending(false);
+        setError(null);
+        changeForm();
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsPending(false);
+        setError(err.message);
+      });
 
     console.log("Sign up!");
   };

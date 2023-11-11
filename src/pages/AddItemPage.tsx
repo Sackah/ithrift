@@ -63,6 +63,21 @@ const AddItemPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
+
+    if (!details.name.trim()) {
+      setError("Name cannot be empty");
+      return;
+    } else if (!/^[a-zA-Z\s]*$/.test(details.name)) {
+      setError("Name can oly contain letters and spaces");
+    }
+
+    if (!details.description.trim()) {
+      setError("Description cannot be empty");
+      return;
+    } else if (!/^[a-zA-Z\s]*$/.test(details.name)) {
+      setError("Details can only contain letters and spaces");
+    }
+
     fetch(`${BASE_URL}items`, {
       method: "POST",
       headers: {
@@ -73,11 +88,12 @@ const AddItemPage = () => {
     })
       .then((res) => {
         if (!res.ok) {
-          setError("Failed to submit!");
-        } else {
-          navigate("/home");
+          throw new Error(res.statusText);
         }
         return res.json();
+      })
+      .then((data) => {
+        navigate("/home");
       })
       .catch((err) => {
         setError(err.message);

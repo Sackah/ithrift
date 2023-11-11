@@ -8,3 +8,6 @@ export type HamburgerMenuProps = {
 export type SignUpFormProps = {
   changeForm: () => void;
 };
+export type ErrorProps = {
+  message: string;
+};

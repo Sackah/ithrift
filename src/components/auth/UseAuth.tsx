@@ -11,7 +11,7 @@ const UseAuth = ({ children }: useAuthProps) => {
     if (!token) {
       navigate("/signin");
     }
-  }, []);
+  }, [navigate]);
 
   const token = localStorage.getItem("ACCESS_TOKEN_KEY");
 
