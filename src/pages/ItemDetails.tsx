@@ -4,6 +4,7 @@ import Loading from "../components/partials/Loading";
 import Error from "../components/partials/Error";
 import { item } from "../state/userSlice";
 import "../pages/styles/ItemDetails.css";
+import { convertToStandardTime } from "../helperFunctions/helperFunctions";
 
 const ItemDetails = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const ItemDetails = () => {
             <div className="image-container">
               <img src={itemData.imageUrl} alt={itemData.name} />
             </div>
-            <p>Uploaded on {itemData.createdAt}</p>
+            <p>Uploaded on {convertToStandardTime(itemData.createdAt)}</p>
           </div>
         </div>
       )}
