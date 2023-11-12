@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
     if (accessToken) {
-      dispatch(login(accessToken));
+      dispatch(login(accessToken)).catch((err) => console.log(err));
     }
   }, [dispatch]);
 

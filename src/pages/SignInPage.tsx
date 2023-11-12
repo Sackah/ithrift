@@ -32,8 +32,13 @@ const SignInPage = () => {
       .then((data) => {
         if (data.accessToken) {
           localStorage.setItem("ACCESS_TOKEN_KEY", data.accessToken);
-          dispatch(login(data.accessToken));
-          navigate("/personal");
+          dispatch(login(data.accessToken))
+            .then(() => {
+              navigate("/personal");
+            })
+            .catch((err) => {
+              setError(err.message);
+            });
         }
         setIsLoggingIn(false);
         setError(data.message);

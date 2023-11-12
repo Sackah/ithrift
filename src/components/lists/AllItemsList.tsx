@@ -1,5 +1,6 @@
 import { item } from "../../state/userSlice";
 import { Link } from "react-router-dom";
+import { convertToStandardTime } from "../../helperFunctions/helperFunctions";
 
 type AllItemsListProps = {
   items: item[];
@@ -15,7 +16,10 @@ const AllItemsList = (props: AllItemsListProps) => {
             <div className="image-container">
               <img src={item.imageUrl} alt={item.name} />
             </div>
-            <p>Uploaded by: {item.user?.name}</p>
+            <p>
+              Uploaded by: {item.user.name} on{" "}
+              {convertToStandardTime(item.createdAt)}
+            </p>
           </div>
         </Link>
       ))}

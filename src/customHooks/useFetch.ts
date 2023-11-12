@@ -8,8 +8,8 @@ const useFetch = (initialUrl: string) => {
   const [url, setUrl] = useState(initialUrl);
 
   useEffect(() => {
-    const abortCont = new AbortController();
     const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
+    const abortCont = new AbortController();
 
     fetch(`${BASE_URL}${url}`, {
       signal: abortCont.signal,

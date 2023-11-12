@@ -19,7 +19,7 @@ export type item = {
   userName: string;
   createdAt: string;
   updatedAt: string;
-  user?: UserData;
+  user: UserData;
 };
 
 export type UserState = {
@@ -60,7 +60,7 @@ export const login = createAsyncThunk(
       },
     });
 
-    if (response.status >= 200 && response.status < 300) {
+    if (response.ok) {
       return response.json();
     } else {
       throw new Error("Failed to fetch user data");

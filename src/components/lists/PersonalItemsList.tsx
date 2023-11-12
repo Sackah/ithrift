@@ -1,6 +1,7 @@
 import { item } from "../../state/userSlice";
 import Error from "../partials/Error";
 import { BASE_URL } from "../../config";
+import { convertToStandardTime } from "../../helperFunctions/helperFunctions";
 
 type ItemListProps = {
   items: item[];
@@ -8,8 +9,9 @@ type ItemListProps = {
 };
 
 const ItemList = (props: ItemListProps) => {
-  const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
   const handleDelete = (id: string) => {
+    const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
+
     fetch(`${BASE_URL}items/${id}`, {
       method: "DELETE",
       headers: {
@@ -37,6 +39,7 @@ const ItemList = (props: ItemListProps) => {
             <div className="image-container">
               <img src={item.imageUrl} alt={item.name} />
             </div>
+            <p>Uploaded on {convertToStandardTime(item.createdAt)}</p>
             <button onClick={() => handleDelete(item.id)}>Delete Item</button>
           </div>
         ))}
