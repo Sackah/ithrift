@@ -28,7 +28,6 @@ function App() {
     <Routes>
       <Route path="/" element={<SignUpPage />} />
       <Route path="/signin" element={<SignInPage />} />
-      <Route path="/additem" element={<AddItemPage />} />
       <Route
         path="/personal"
         element={
@@ -45,14 +44,14 @@ function App() {
           </UseAuth>
         }
       />
-      {/* <Route
+      <Route
         path="/additem"
         element={
           <UseAuth>
             <AddItemPage />
           </UseAuth>
         }
-      /> */}
+      />
       <Route
         path="/home"
         element={
