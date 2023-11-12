@@ -65,17 +65,17 @@ const AddItemPage = () => {
     const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
 
     if (!details.name.trim()) {
-      setError("Name cannot be empty");
+      setError("Item name cannot be empty");
       return;
     } else if (!/^[a-zA-Z\s]*$/.test(details.name)) {
-      setError("Name can oly contain letters and spaces");
+      setError("Item name can oly contain letters and spaces");
     }
 
     if (!details.description.trim()) {
       setError("Description cannot be empty");
       return;
     } else if (!/^[a-zA-Z\s]*$/.test(details.name)) {
-      setError("Details can only contain letters and spaces");
+      setError("Description can only contain letters and spaces");
     }
 
     fetch(`${BASE_URL}items`, {
