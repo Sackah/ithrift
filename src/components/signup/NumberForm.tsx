@@ -136,6 +136,7 @@ const NumberForm = (props: SignUpFormProps) => {
           onChange={handlePasswordChange}
           value={credentials.password}
           placeholder="create a password"
+          required
         />
         <label htmlFor="confirm" className="visibly-hidden">
           confirm password
@@ -146,6 +147,7 @@ const NumberForm = (props: SignUpFormProps) => {
           onChange={handleConfirmPassWordChange}
           value={credentials.confirmPassword}
           placeholder="confirm password"
+          required
         />
         {!isPending && <button>Sign Up</button>}
         {isPending && (
