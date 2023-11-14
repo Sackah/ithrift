@@ -1,5 +1,5 @@
 import SignUpNav from "../components/nav/SignUpNav";
-import Footer from "../components/signup/Footer";
+import Footer from "../components/partials/Footer";
 import SignUpBox from "../components/signup/SignUpBox";
 import "./styles/SignUp.css";
 

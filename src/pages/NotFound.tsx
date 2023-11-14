@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../pages/styles/NotFound.css";
-import Footer from "../components/signup/Footer";
+import Footer from "../components/partials/Footer";
 
 const NotFound = () => {
   return (
