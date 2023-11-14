@@ -47,6 +47,9 @@ const NumberForm = (props: SignUpFormProps) => {
       body: JSON.stringify(credentials),
     })
       .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network error");
+        }
         console.log(res);
         setIsPending(false);
         setError(null);
