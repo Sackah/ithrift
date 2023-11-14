@@ -14,6 +14,7 @@ const AddItemPage = () => {
     price: "",
   });
   const [error, setError] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState<boolean>(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
 
@@ -62,6 +63,7 @@ const AddItemPage = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsPending(true);
     const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
 
     if (!details.name.trim()) {
@@ -89,11 +91,10 @@ const AddItemPage = () => {
       .then((res) => {
         if (!res.ok) {
           throw new Error(res.statusText);
+        } else {
+          setIsPending(false);
+          navigate("/home");
         }
-        return res.json();
-      })
-      .then((data) => {
-        navigate("/home");
       })
       .catch((err) => {
         setError(err.message);
@@ -138,7 +139,10 @@ const AddItemPage = () => {
           onChange={handlePriceChange}
           value={details.price === "0.00" ? "" : details.price}
         />
-        <button disabled={isButtonDisabled}>Send to iThrift</button>
+        {!isPending && (
+          <button disabled={isButtonDisabled}>Send to iThrift</button>
+        )}
+        {isPending && <button disabled>Sending to iThrift...</button>}
       </form>
     </div>
   );

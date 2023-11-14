@@ -5,6 +5,7 @@ import Error from "../components/partials/Error";
 import { item } from "../state/userSlice";
 import "../pages/styles/ItemDetails.css";
 import { convertToStandardTime } from "../helperFunctions/helperFunctions";
+import HomePageNav from "../components/nav/HomePageNav";
 
 const ItemDetails = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const ItemDetails = () => {
 
   return (
     <>
+      <HomePageNav />
       {itemData && (
         <div className="item-details">
           <div className="item-container">
@@ -21,7 +23,11 @@ const ItemDetails = () => {
             <div className="image-container">
               <img src={itemData.imageUrl} alt={itemData.name} />
             </div>
-            <p>Uploaded on {convertToStandardTime(itemData.createdAt)}</p>
+            <p>{itemData.description}</p>
+            <p>
+              Uploaded by {itemData.user.name} on{" "}
+              {convertToStandardTime(itemData.createdAt)}
+            </p>
           </div>
         </div>
       )}

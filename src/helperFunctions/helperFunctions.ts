@@ -1,7 +1,7 @@
 export function convertToStandardTime(isoDateString: string) {
-  let date = new Date(isoDateString);
+  const date = new Date(isoDateString);
 
-  let options: Intl.DateTimeFormatOptions = {
+  const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -10,9 +10,7 @@ export function convertToStandardTime(isoDateString: string) {
     hour12: true,
   };
 
-  let standardTime = date.toLocaleString("en-US", options);
-
-  standardTime = standardTime.replace(",", " at");
+  const standardTime = date.toLocaleString("en-US", options);
 
   return standardTime;
 }

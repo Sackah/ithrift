@@ -43,6 +43,15 @@ a{
   font-size: 2rem;
 }
 
+h5{
+  font-size: 2rem;
+  margin: 10px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @keyframes shake {
   0% { transform: translateX(0); }
   10% { transform: translateX(-10px) rotate(-5deg); }

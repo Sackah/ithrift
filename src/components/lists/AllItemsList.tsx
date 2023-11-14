@@ -17,8 +17,10 @@ const AllItemsList = (props: AllItemsListProps) => {
               <img src={item.imageUrl} alt={item.name} />
             </div>
             <p>
-              Uploaded by: {item.user.name} on{" "}
-              {convertToStandardTime(item.createdAt)}
+              Uploaded by: {item.user.name}{" "}
+              <p className="time-and-date">
+                {convertToStandardTime(item.createdAt)}
+              </p>
             </p>
           </div>
         </Link>

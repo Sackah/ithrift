@@ -3,12 +3,18 @@ import Error from "../partials/Error";
 import { BASE_URL } from "../../config";
 import { convertToStandardTime } from "../../helperFunctions/helperFunctions";
 
-type ItemListProps = {
+type PersonalItemListProps = {
   items: item[];
   refetch: (newUrl: string) => void;
 };
 
-const ItemList = (props: ItemListProps) => {
+/**
+ * Renders only personal items of the logged in user
+ * @param props
+ * @returns
+ */
+
+const PersonalItemsList = (props: PersonalItemListProps) => {
   const handleDelete = (id: string) => {
     const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
 
@@ -19,11 +25,13 @@ const ItemList = (props: ItemListProps) => {
       },
     })
       .then((res) => {
+        console.log(res);
+        if (res.ok) {
+          props.refetch("users/items");
+          window.location.reload();
+          console.log(res);
+        }
         return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        props.refetch("users/items");
       })
       .catch((error) => {
         console.log(error);
@@ -50,4 +58,4 @@ const ItemList = (props: ItemListProps) => {
   }
 };
 
-export default ItemList;
+export default PersonalItemsList;

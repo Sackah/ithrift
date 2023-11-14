@@ -1,11 +1,12 @@
 .item-details{
-    width: 100%;
+    width: 90%;
     text-align: center;
+    margin: auto;
 }
 
 .item-details .image-container{
-    height: 40%;
-    width: 40%;
+    height: 30%;
+    width: 30%;
     overflow: hidden;
     border-radius: 5px;
     display: flex;
@@ -14,8 +15,21 @@
     margin: auto;
 }
 
-.image-container img {
+.item-details .image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
+@media only screen and (max-width: 1000px){
+    .item-details .image-container{
+        height: 60%;
+        width: 60%;
+    }
+}
+
+
+/* MOBILE DISPLAY */
+@media only screen and (max-width: 600px){
+
+}

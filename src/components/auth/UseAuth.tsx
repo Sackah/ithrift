@@ -2,6 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthProps } from "../../types/types";
 
+/**
+ * User Authentication Service
+ * @param param0
+ * @returns
+ */
+
 const UseAuth = ({ children }: useAuthProps) => {
   const navigate = useNavigate();
 
