@@ -1,10 +1,12 @@
-import { item } from "../../state/userSlice";
 import { Link } from "react-router-dom";
 import { convertToStandardTime } from "../../utils/convertToStandardTime";
+import { AllItemsListProps } from "../../types/types";
 
-type AllItemsListProps = {
-  items: item[];
-};
+/**
+ * Strictly displays only all items intended to be shown on the home page
+ * @param {Array} props - Array of items to render
+ * @returns {JSX.Element}
+ */
 
 const AllItemsList = (props: AllItemsListProps) => {
   return (

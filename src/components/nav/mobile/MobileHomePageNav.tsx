@@ -1,5 +1,10 @@
 import { NavLink } from "react-router-dom";
 
+/**
+ * Navigation bar for mobile devices on the home page
+ * @returns {JSX.Element}
+ */
+
 const MobileHomePageNav = () => {
   return (
     <>

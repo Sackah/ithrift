@@ -2,10 +2,15 @@ import { useParams } from "react-router";
 import useFetch from "../customHooks/useFetch";
 import Loading from "../components/partials/Loading";
 import Error from "../components/partials/Error";
-import { item } from "../state/userSlice";
+import { item } from "../types/types";
 import "../pages/styles/ItemDetails.css";
 import { convertToStandardTime } from "../utils/convertToStandardTime";
 import HomePageNav from "../components/nav/HomePageNav";
+
+/**
+ * This page displays the details of a specific item clicked on from the home page
+ * @returns {JSX.Element}
+ */
 
 const ItemDetailsPage = () => {
   const { id } = useParams();

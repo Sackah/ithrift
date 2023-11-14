@@ -1,5 +1,12 @@
 import { HamburgerMenuProps } from "../../../types/types";
 
+/**
+ * Hamburger menu icon which toggles a dropdown menu when clicked on, for mobile devices
+ * @param {boolean} props.isDropDownActive - whether the dropdown menu is active
+ * @param {Function} props.toggleMenu - function to toggle down or up the dropdown menu
+ * @returns {JSX.Element}
+ */
+
 const HamburgerMenu = (props: HamburgerMenuProps) => {
   const { isDropDownActive, toggleMenu } = props;
 
@@ -15,7 +22,5 @@ const HamburgerMenu = (props: HamburgerMenuProps) => {
     </div>
   );
 };
-
-
 
 export default HamburgerMenu;

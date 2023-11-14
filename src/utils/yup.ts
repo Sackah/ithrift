@@ -20,14 +20,16 @@ export const signUpSchema = yup.object().shape({
     .length(9, "Phone number must be 9 digits"),
 });
 
-export const signInSchema = yup.object().shape({
-  phone: yup
+export const addItemSchema = yup.object().shape({
+  name: yup
     .string()
-    .required("Phone number cannot be empty")
-    .length(9, "Phone number must be 9 digits"),
-  password: yup
+    .required("Item name cannot be empty")
+    .matches(/^[a-zA-Z\s]*$/, "Item name can only contain letters and spaces"),
+  description: yup
     .string()
-    .required("Password cannot be empty")
-    .min(6, "Password must be at least 6 characters")
-    .max(12, "Password cannot exceed 12 characters"),
+    .required("Description cannot be empty")
+    .matches(
+      /^[a-zA-Z\s]*$/,
+      "Description can only contain letters and spaces"
+    ),
 });

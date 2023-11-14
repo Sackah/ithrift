@@ -1,6 +1,6 @@
 /**
  * @param {string} isoDateString - date in iso format
- * @returns {string} the date in a format - 24th November 2023, at 5:15 pm
+ * @returns {string} the date in the format - 24th November 2023, at 5:15 pm
  */
 
 export function convertToStandardTime(isoDateString: string) {

@@ -4,6 +4,11 @@ import HamburgerMenu from "./HamburgerMenu";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * Navigation bar for mobile devices on the signup page
+ * @returns {JSX.Element}
+ */
+
 const MobileSignUpNav = () => {
   const [isDropDownActive, setIsDropDownActive] = useState(false);
 

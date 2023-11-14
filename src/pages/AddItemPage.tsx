@@ -3,8 +3,12 @@ import "../pages/styles/AddItem.css";
 import { BASE_URL } from "../config";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { addItemSchema } from "../utils/yup";
 
-type Change = React.ChangeEvent<HTMLInputElement>;
+/**
+ * Page for uploading new items unto the website
+ * @returns {JSX.Element}
+ */
 
 const AddItemPage = () => {
   const [details, setDetails] = useState({
@@ -18,7 +22,12 @@ const AddItemPage = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
 
-  const handleImageChange = (event: Change) => {
+  /**
+   * Attached images are uploaded unto a third party service, the response from this api
+   * is an image url which is parsed as part of the item properties upon submission
+   * @param event image attachment
+   */
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       setIsButtonDisabled(true);
       const image = new FormData();
@@ -40,65 +49,54 @@ const AddItemPage = () => {
     }
   };
 
-  const handleItemChange = (event: Change) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
     setDetails((prev) => ({
       ...prev,
-      name: event.target.value,
+      [name]: value,
     }));
   };
 
-  const handleDescriptionChange = (event: Change) => {
-    setDetails((prev) => ({
-      ...prev,
-      description: event.target.value,
-    }));
-  };
-
-  const handlePriceChange = (event: Change) => {
+  /**
+   * Function that checks if there is an input value, else defaults to 0
+   * @param event
+   */
+  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDetails((prev) => ({
       ...prev,
       price: event.target.value === "" ? "0.00" : event.target.value,
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsPending(true);
+    const { name, description } = details;
     const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
 
-    if (!details.name.trim()) {
-      setError("Item name cannot be empty");
-      return;
-    } else if (!/^[a-zA-Z\s]*$/.test(details.name)) {
-      setError("Item name can oly contain letters and spaces");
-    }
-
-    if (!details.description.trim()) {
-      setError("Description cannot be empty");
-      return;
-    } else if (!/^[a-zA-Z\s]*$/.test(details.name)) {
-      setError("Description can only contain letters and spaces");
-    }
-
-    fetch(`${BASE_URL}items`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(details),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        } else {
-          setIsPending(false);
-          navigate("/home");
-        }
-      })
-      .catch((err) => {
-        setError(err.message);
+    try {
+      await addItemSchema.validate({ name, description });
+      const res = await fetch(`${BASE_URL}items`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(details),
       });
+
+      if (res.ok) {
+        setIsPending(false);
+        navigate("/home");
+      } else {
+        throw new Error(res.statusText);
+      }
+    } catch (error: any) {
+      setError(error.message);
+      setIsPending(false);
+      setIsButtonDisabled(false);
+    }
   };
 
   return (
@@ -110,7 +108,8 @@ const AddItemPage = () => {
         <input
           type="text"
           id="itemName"
-          onChange={handleItemChange}
+          name="name"
+          onChange={handleChange}
           required
           value={details.name}
         />
@@ -119,7 +118,8 @@ const AddItemPage = () => {
           type="text"
           id="description"
           required
-          onChange={handleDescriptionChange}
+          name="description"
+          onChange={handleChange}
           value={details.description}
         />
         <label htmlFor="images">Add an image:</label>

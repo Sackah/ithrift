@@ -1,30 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BASE_URL } from "../config";
-
-export type UserData = {
-  id: number;
-  name: string;
-  phone: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type item = {
-  id: string;
-  name: string;
-  imageUrl: string;
-  description: string;
-  userId: string;
-  price: string;
-  userName: string;
-  createdAt: string;
-  updatedAt: string;
-  user: UserData;
-};
-
-export type UserState = {
-  data: UserData | null;
-};
+import { UserState } from "../types/types";
 
 const initialState: UserState = {
   data: null,

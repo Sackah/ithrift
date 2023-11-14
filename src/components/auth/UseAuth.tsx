@@ -5,7 +5,7 @@ import { useAuthProps } from "../../types/types";
 /**
  * User Authentication Service
  * @param param0
- * @returns
+ * @returns JSX if user is logged in, redirects to signin page if user is logged out
  */
 
 const UseAuth = ({ children }: useAuthProps) => {

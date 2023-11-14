@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 
+/**
+ * Buttons on the nav bar of the signup page for desktop display
+ * @returns {JSX.Element} - two buttons for signing in and signing up
+ */
+
 const NavButtons = () => {
   return (
     <div className="nav-buttons">

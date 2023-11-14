@@ -1,6 +1,11 @@
 import { NavLink } from "react-router-dom";
 import logo from "../../../assets/20231107_224523.png";
 
+/**
+ * Navigation bar for desktop devices on the home page
+ * @returns {JSX.Element}
+ */
+
 const DesktopHomePageNav = () => {
   return (
     <nav className="desktop-homepage-nav">

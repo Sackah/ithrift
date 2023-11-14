@@ -5,7 +5,9 @@ import { signUpSchema } from "../../utils/yup";
 
 /**
  * Sign up form with name, number and password fields
- * @param {Function} props - changes the form from the number field to an otp field upon validation
+ * @param {Function} props.changeForm - changes the form from the number field to
+ * an otp field upon validation
+ *
  * @returns {JSX.Element}
  */
 

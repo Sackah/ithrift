@@ -1,17 +1,12 @@
-import { item } from "../../state/userSlice";
 import Error from "../partials/Error";
 import { BASE_URL } from "../../config";
 import { convertToStandardTime } from "../../utils/convertToStandardTime";
-
-type PersonalItemListProps = {
-  items: item[];
-  refetch: (newUrl: string) => void;
-};
+import { PersonalItemListProps } from "../../types/types";
 
 /**
- * Renders only personal items of the logged in user
- * @param props
- * @returns
+ * Strictly renders only personal items of the logged in user
+ * @param {Array} props - list of items to be displayed
+ * @returns {JSX.Element}
  */
 
 const PersonalItemsList = (props: PersonalItemListProps) => {
