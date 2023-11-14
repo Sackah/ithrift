@@ -102,7 +102,7 @@ const AddItemPage = () => {
 
   return (
     <div className="add-item">
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error-message">{error}</p>}
       <h5>Upload an item</h5>
       <form onSubmit={handleSubmit}>
         <label htmlFor="itemName">Item Name:</label>

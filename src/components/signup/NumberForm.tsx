@@ -101,7 +101,7 @@ const NumberForm = (props: SignUpFormProps) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {error && <p className="error">{error}</p>}
+        {error && <p className="error-message">{error}</p>}
         <label htmlFor="username" className="visibly-hidden">
           Name
         </label>

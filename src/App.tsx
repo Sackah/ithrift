@@ -28,7 +28,12 @@ function App() {
     <Routes>
       <Route path="/" element={<SignUpPage />} />
       <Route path="/signin" element={<SignInPage />} />
-      <Route
+      <Route path="/personal" element={<PersonalPage />} />
+      <Route path="/mycollection" element={<MyCollection />} />
+      <Route path="/additem" element={<AddItemPage />} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/items/:id" element={<ItemDetails />} />
+      {/* <Route
         path="/personal"
         element={
           <UseAuth>
@@ -67,7 +72,7 @@ function App() {
             <ItemDetails />
           </UseAuth>
         }
-      />
+      /> */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

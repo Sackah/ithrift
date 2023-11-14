@@ -106,7 +106,7 @@ const SignInPage = () => {
           New User? <Link to={"/"}>Sign Up</Link>
         </p>
       </div>
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 };

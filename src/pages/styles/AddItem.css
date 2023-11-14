@@ -43,8 +43,7 @@
     transition: background-color 0.5s ease;
 }
 
-.add-item .error{
-    color: red;
+.add-item .error-message{
     margin: 0;
     font-size: 1.2rem;
     width: 100%;

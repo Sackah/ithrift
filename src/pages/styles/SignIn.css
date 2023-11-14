@@ -98,8 +98,7 @@ input[type="number"]::-webkit-outer-spin-button {
     position: relative;
 }
 
-.sign-in .error{
-    color: red;
+.sign-in .error-message{
     position: absolute;
     top: 0;
     font-size: 1rem;
