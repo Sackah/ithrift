@@ -13,7 +13,7 @@ const SignUpPage = () => {
             Share more, <br /> Waste less
           </h3>
           <p>
-            Combat waste with iTHrift: the platform that connects you with
+            Combat waste with iThrift: the platform that connects you with
             <br /> locals to exchange items you no longer need and discover
             things you do.
           </p>
