@@ -47,13 +47,13 @@ const NumberForm = (props: SignUpFormProps) => {
       body: JSON.stringify(credentials),
     })
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network error");
+        if (res.ok) {
+          setIsPending(false);
+          setError(null);
+          changeForm();
+        } else {
+          throw new Error(res.statusText);
         }
-        console.log(res);
-        setIsPending(false);
-        setError(null);
-        changeForm();
       })
       .catch((err) => {
         console.log(err);
