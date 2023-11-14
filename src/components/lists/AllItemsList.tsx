@@ -1,6 +1,6 @@
 import { item } from "../../state/userSlice";
 import { Link } from "react-router-dom";
-import { convertToStandardTime } from "../../helperFunctions/helperFunctions";
+import { convertToStandardTime } from "../../utils/convertToStandardTime";
 
 type AllItemsListProps = {
   items: item[];

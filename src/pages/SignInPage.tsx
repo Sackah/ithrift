@@ -17,58 +17,43 @@ const SignInPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoggingIn(true);
 
-    fetch(`${BASE_URL}auth/signin`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(credentials),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        if (data.accessToken) {
-          localStorage.setItem("ACCESS_TOKEN_KEY", data.accessToken);
-          dispatch(login(data.accessToken))
-            .then(() => {
-              navigate("/personal");
-            })
-            .catch((err) => {
-              setError(err.message);
-            });
-        }
-        setIsLoggingIn(false);
-        setError(data.message);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoggingIn(false);
-        setError(err.message);
+    try {
+      const res = await fetch(`${BASE_URL}auth/signin`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
       });
+
+      const data = await res.json();
+
+      if (data.accessToken) {
+        localStorage.setItem("ACCESS_TOKEN_KEY", data.accessToken);
+        await dispatch(login(data.accessToken));
+        navigate("/personal");
+      } else {
+        setError(data.message);
+      }
+
+      setIsLoggingIn(false);
+    } catch (err: any) {
+      console.log(err);
+      setIsLoggingIn(false);
+      setError(err.message);
+    }
 
     console.log("Submit!");
   };
 
-  const handleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-
-    if (value.length <= 9) {
-      setCredentials((prevState) => ({
-        ...prevState,
-        phone: value,
-      }));
-    }
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
 
     setCredentials((prevState) => ({
       ...prevState,
-      password: value,
+      [name]: value,
     }));
   };
 
@@ -88,7 +73,8 @@ const SignInPage = () => {
               value={credentials.phone}
               title="Please enter a 9-digit number"
               maxLength={9}
-              onChange={handleNumberChange}
+              name="phone"
+              onChange={handleChange}
               required
             />
           </div>
@@ -96,7 +82,8 @@ const SignInPage = () => {
           <input
             type="password"
             id="password"
-            onChange={handlePasswordChange}
+            name="password"
+            onChange={handleChange}
             required
           />
           {!isLoggingIn && <button>Log in</button>}

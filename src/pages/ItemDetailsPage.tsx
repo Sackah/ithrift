@@ -4,10 +4,10 @@ import Loading from "../components/partials/Loading";
 import Error from "../components/partials/Error";
 import { item } from "../state/userSlice";
 import "../pages/styles/ItemDetails.css";
-import { convertToStandardTime } from "../helperFunctions/helperFunctions";
+import { convertToStandardTime } from "../utils/convertToStandardTime";
 import HomePageNav from "../components/nav/HomePageNav";
 
-const ItemDetails = () => {
+const ItemDetailsPage = () => {
   const { id } = useParams();
   const { data, isPending, error } = useFetch(`items/${id}`);
 
@@ -37,4 +37,4 @@ const ItemDetails = () => {
   );
 };
 
-export default ItemDetails;
+export default ItemDetailsPage;

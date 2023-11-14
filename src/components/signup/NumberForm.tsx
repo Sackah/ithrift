@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { SignUpFormProps } from "../../types/types";
 import { BASE_URL } from "../../config";
+import { signUpSchema } from "../../utils/yup";
+
+/**
+ * Sign up form with name, number and password fields
+ * @param {Function} props - changes the form from the number field to an otp field upon validation
+ * @returns {JSX.Element}
+ */
 
 const NumberForm = (props: SignUpFormProps) => {
   const [credentials, setCredentials] = useState({
@@ -13,88 +20,37 @@ const NumberForm = (props: SignUpFormProps) => {
   const [isPending, setIsPending] = useState(false);
   const { changeForm } = props;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsPending(true);
 
-    if (!credentials.name.trim()) {
-      setError("Name cannot be empty");
-      setIsPending(false);
-      return;
-    }
-
-    if (!/^[a-zA-Z\s]*$/.test(credentials.name)) {
-      setError("Name can only contain letters and spaces");
-      setIsPending(false);
-      return;
-    }
-
-    if (credentials.confirmPassword !== credentials.password) {
-      setError("Passwords do not match!");
-      setIsPending(false);
-      return;
-    }
-
-    if (credentials.phone.length !== 9) {
-      setError("Number should be 9 digits");
-      setIsPending(false);
-      return;
-    }
-
-    fetch(`${BASE_URL}auth/signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(credentials),
-    })
-      .then((res) => {
-        if (res.ok) {
-          setIsPending(false);
-          setError(null);
-          changeForm();
-        } else {
-          throw new Error(res.statusText);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsPending(false);
-        setError(err.message);
+    try {
+      await signUpSchema.validate(credentials);
+      const res = await fetch(`${BASE_URL}auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
       });
 
-    console.log("Sign up!");
-  };
-
-  const handleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-
-    if (value.length <= 9) {
-      setCredentials((prevState) => ({
-        ...prevState,
-        phone: value,
-      }));
+      if (res.ok) {
+        setIsPending(false);
+        setError(null);
+        changeForm();
+      } else {
+        throw new Error(res.statusText);
+      }
+    } catch (err: any) {
+      setError(err.message);
+      setIsPending(false);
     }
   };
 
-  const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCredentials((prevState) => ({
-      ...prevState,
-      name: event.target.value,
-    }));
-  };
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials((prevState) => ({
       ...prevState,
-      password: event.target.value,
-    }));
-  };
-
-  const handleConfirmPassWordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setCredentials((prevState) => ({
-      ...prevState,
-      confirmPassword: event.target.value,
+      [name]: value,
     }));
   };
 
@@ -109,8 +65,9 @@ const NumberForm = (props: SignUpFormProps) => {
           type="text"
           id="username"
           placeholder="what would you like us to call you?"
+          name="name"
           value={credentials.name}
-          onChange={handleUserNameChange}
+          onChange={handleChange}
           required
         />
         <label htmlFor="signup-number" className="visibly-hidden">
@@ -125,7 +82,8 @@ const NumberForm = (props: SignUpFormProps) => {
             value={credentials.phone}
             title="Please enter a 9-digit number"
             maxLength={9}
-            onChange={handleNumberChange}
+            name="phone"
+            onChange={handleChange}
             placeholder="enter your phone number"
             required
           />
@@ -136,7 +94,8 @@ const NumberForm = (props: SignUpFormProps) => {
         <input
           type="password"
           id="password"
-          onChange={handlePasswordChange}
+          name="password"
+          onChange={handleChange}
           value={credentials.password}
           placeholder="create a password"
           required
@@ -147,7 +106,8 @@ const NumberForm = (props: SignUpFormProps) => {
         <input
           type="password"
           id="confirm"
-          onChange={handleConfirmPassWordChange}
+          name="confirmPassword"
+          onChange={handleChange}
           value={credentials.confirmPassword}
           placeholder="confirm password"
           required

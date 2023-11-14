@@ -2,9 +2,16 @@ import { useState } from "react";
 import { SignUpFormProps } from "../../types/types";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { login } from "../../state/userSlice";
 import { AppDispatch } from "../../state/store";
 import { BASE_URL } from "../../config";
+// eslint-disable-next-line
+import { login } from "../../state/userSlice";
+
+/**
+ * Form for OTP validation
+ * @param {Function} props.changeForm - function for switching form back to number form
+ * @returns {JSX.Element}
+ */
 
 const OTPForm = (props: SignUpFormProps) => {
   const [otp, setOtp] = useState("");
@@ -12,6 +19,7 @@ const OTPForm = (props: SignUpFormProps) => {
   const [isPending, setIsPending] = useState(false);
   const { changeForm } = props;
   const navigate = useNavigate();
+  // eslint-disable-next-line
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

@@ -7,7 +7,7 @@ import AddItemPage from "./pages/AddItemPage";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import UseAuth from "./components/auth/UseAuth";
-import ItemDetails from "./pages/ItemDetails";
+import ItemDetailsPage from "./pages/ItemDetailsPage";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./state/store";
 import { login } from "./state/userSlice";
@@ -64,7 +64,7 @@ function App() {
         path="/items/:id"
         element={
           <UseAuth>
-            <ItemDetails />
+            <ItemDetailsPage />
           </UseAuth>
         }
       />

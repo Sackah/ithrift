@@ -1,7 +1,7 @@
 import { item } from "../../state/userSlice";
 import Error from "../partials/Error";
 import { BASE_URL } from "../../config";
-import { convertToStandardTime } from "../../helperFunctions/helperFunctions";
+import { convertToStandardTime } from "../../utils/convertToStandardTime";
 
 type PersonalItemListProps = {
   items: item[];

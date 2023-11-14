@@ -1,6 +1,18 @@
 import { useState, useEffect } from "react";
 import { BASE_URL } from "../config";
 
+/**
+ * Custom hook to fetch data
+ * @typedef {object} UseFetchResult
+ * @property {null | any} data - the fetched data
+ * @property {boolean} isPending - whether the data is stilll being fetched
+ * @property {null | any} error - any errors that occured during fetch
+ * @property {Function} refetch - a setter function to change the initial url
+ *
+ * @param initialUrl a url called with the fetch hook
+ * @returns {UseFetchResult}
+ */
+
 const useFetch = (initialUrl: string) => {
   const [data, setData] = useState<null | any>(null);
   const [isPending, setIsPending] = useState<boolean>(true);
@@ -11,31 +23,34 @@ const useFetch = (initialUrl: string) => {
     const accessToken = localStorage.getItem("ACCESS_TOKEN_KEY");
     const abortCont = new AbortController();
 
-    fetch(`${BASE_URL}${url}`, {
-      signal: abortCont.signal,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-      .then((res) => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${BASE_URL}${url}`, {
+          signal: abortCont.signal,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
         if (!res.ok) {
           throw Error("could not fetch the data for that resource");
         }
-        return res.json();
-      })
-      .then((data) => {
+
+        const data = await res.json();
         setIsPending(false);
         setData(data);
         setError(null);
-      })
-      .catch((err) => {
+      } catch (err: any) {
         if (err.name === "AbortError") {
           console.log("fetch aborted");
         } else {
           setIsPending(false);
           setError(err.message);
         }
-      });
+      }
+    };
+
+    fetchData();
 
     return () => {
       abortCont.abort();
