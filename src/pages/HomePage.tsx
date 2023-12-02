@@ -5,10 +5,11 @@ import Error from "../components/partials/Error";
 import useFetch from "../customHooks/useFetch";
 import "../pages/styles/Home.css";
 import { useState } from "react";
+import { item } from "../types/types";
 
 const HomePage = () => {
   const [query, setQuery] = useState("");
-  const { data, isPending, error, refetch } = useFetch(`items?search=${query}`);
+  const { data, isPending, error, refetch } = useFetch<item[]>(`items?search=${query}`);
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,12 +20,7 @@ const HomePage = () => {
     <div className="home-page">
       <HomePageNav />
       <form onSubmit={handleSearch}>
-        <input
-          type="search"
-          placeholder="Search by name..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+        <input type="search" placeholder="Search by name..." value={query} onChange={(e) => setQuery(e.target.value)} />
         <button aria-label="search">
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>

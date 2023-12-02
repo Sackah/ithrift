@@ -4,7 +4,7 @@ import { BASE_URL } from "../config";
 /**
  * Custom hook to fetch data
  * @typedef {object} UseFetchResult
- * @property {null | any} data - the fetched data
+ * @property {null | T} data - the fetched data
  * @property {boolean} isPending - whether the data is still being fetched
  * @property {null | any} error - any errors that occured during fetch
  * @property {Function} refetch - a setter function to update the initial url
@@ -13,8 +13,8 @@ import { BASE_URL } from "../config";
  * @returns {UseFetchResult}
  */
 
-const useFetch = (initialUrl: string) => {
-  const [data, setData] = useState<null | any>(null);
+const useFetch = <T>(initialUrl: string) => {
+  const [data, setData] = useState<null | T>(null);
   const [isPending, setIsPending] = useState<boolean>(true);
   const [error, setError] = useState<null | any>(null);
   const [url, setUrl] = useState(initialUrl);
@@ -36,7 +36,7 @@ const useFetch = (initialUrl: string) => {
           throw Error("could not fetch the data for that resource");
         }
 
-        const data = await res.json();
+        const data: T = await res.json();
         setIsPending(false);
         setData(data);
         setError(null);

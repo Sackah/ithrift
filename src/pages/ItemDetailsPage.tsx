@@ -14,24 +14,23 @@ import HomePageNav from "../components/nav/HomePageNav";
 
 const ItemDetailsPage = () => {
   const { id } = useParams();
-  const { data, isPending, error } = useFetch(`items/${id}`);
+  const { data, isPending, error } = useFetch<item>(`items/${id}`);
 
-  const itemData = data as item;
+  // const itemData = data as item;
 
   return (
     <>
       <HomePageNav />
-      {itemData && (
+      {data && (
         <div className="item-details">
           <div className="item-container">
-            <h5>{itemData.name}</h5>
+            <h5>{data.name}</h5>
             <div className="image-container">
-              <img src={itemData.imageUrl} alt={itemData.name} />
+              <img src={data.imageUrl} alt={data.name} />
             </div>
-            <p>{itemData.description}</p>
+            <p>{data.description}</p>
             <p>
-              Uploaded by {itemData.user.name} on{" "}
-              {convertToStandardTime(itemData.createdAt)}
+              Uploaded by {data.user.name} on {convertToStandardTime(data.createdAt)}
             </p>
           </div>
         </div>

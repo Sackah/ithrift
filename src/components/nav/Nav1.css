@@ -1,7 +1,3 @@
-*, *::before, *::after{
-    box-sizing: border-box;
-}
-
 :root{
     --header-background: #f7f6f2;
 }

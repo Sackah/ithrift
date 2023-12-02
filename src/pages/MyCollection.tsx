@@ -4,9 +4,10 @@ import Error from "../components/partials/Error";
 import useFetch from "../customHooks/useFetch";
 import PersonalItemsList from "../components/lists/PersonalItemsList";
 import "../pages/styles/MyCollection.css";
+import { item } from "../types/types";
 
 const MyCollection = () => {
-  const { error, isPending, data, refetch } = useFetch("users/items");
+  const { error, isPending, data, refetch } = useFetch<item[]>("users/items");
 
   return (
     <div className="my-collection-page">
