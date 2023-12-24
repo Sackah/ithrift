@@ -16,8 +16,6 @@ const ItemDetailsPage = () => {
   const { id } = useParams();
   const { data, isPending, error } = useFetch<item>(`items/${id}`);
 
-  // const itemData = data as item;
-
   return (
     <>
       <HomePageNav />

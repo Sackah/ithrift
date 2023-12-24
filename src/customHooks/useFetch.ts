@@ -13,7 +13,7 @@ import { BASE_URL } from "../config";
  * @returns {UseFetchResult}
  */
 
-const useFetch = <T>(initialUrl: string) => {
+const useFetch = <T extends {} = any>(initialUrl: string) => {
   const [data, setData] = useState<null | T>(null);
   const [isPending, setIsPending] = useState<boolean>(true);
   const [error, setError] = useState<null | any>(null);
